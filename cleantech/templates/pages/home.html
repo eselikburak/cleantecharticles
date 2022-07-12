@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Home {% endblock %}
+
+{% block content %}
+
+<br>
+<br>
+<div class="bg-dark text-secondary px-4 py-5 text-center my-3">
+    <div class="py-5">
+        <h1 class="display-5 fw-bold text-white">Clean Way To Learn</h1>
+        <div class="col-lg-6 mx-auto">
+            <p class="fs-5 mb-4">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Exercitationem vitae
+                dolore harum ad officia possimus voluptatem impedit in repellendus nemo, quia voluptate esse
+                aspernatur eligendi officiis ipsa voluptas necessitatibus assumenda?</p>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <a class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold" href="#" role="button">Visit Blog</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container py-4">
+    <div class="row align-items-md-stretch">
+        <div class="col-md-6">
+            <div class="h-100 p-5 text-white bg-dark rounded-3">
+                <h2>Django Tutorials</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae, inventore. Molestias, dolor
+                    sunt illum deserunt dignissimos nisi accusantium natus ipsa tenetur iusto, voluptates,
+                    exercitationem quae corporis maxime perferendis. Fuga, quod?</p>
+                <a class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold" href="#" role="button">Go For Django Articles</a>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="h-100 p-5 bg-light border rounded-3">
+                <h2>Python Tutorials</h2>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugiat nisi quam eius est maiores
+                    similique dicta at perferendis culpa rerum tempora, corporis voluptatem ipsa error natus
+                    officiis quidem iure quis.</p>
+                <a class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold" href="#" role="button">Go For Python Articles</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container col-xxl-8 px-4 py-5">
+    <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+        <div class="col-10 col-sm-8 col-lg-6">
+            <img src="{% static 'images/_py.jpg' %}" class="d-block mx-lg-auto img-fluid" alt="Python Image" width="700"
+                height="500" loading="lazy">
+        </div>
+        <div class="col-lg-6">
+            <h1 class="display-5 fw-bold lh-1 mb-3">Not a Basic Single Blog</h1>
+            <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio tempore, nihil dicta
+                impedit delectus alias tempora aut quaerat necessitatibus. Maiores quas nulla, culpa in itaque ipsum
+                dolore aperiam tenetur? Tenetur?</p>
+        </div>
+    </div>
+</div>
+
+<!-- counters starts -->
+<div class="container">
+    <div class="row py-3 ">
+        <div class="col-lg-4 text-center bg-dark border border-warning text-white rounded-pill">
+            <h4 class="text py-5"><i class="fa fa-pencil"></i> Authors - 4</h4>
+        </div>
+        <div class="col-lg-4 text-center border border-warning rounded-pill">
+            <h4 class="text py-5"><i class="fa fa-book"></i> Articles - 124</h4>
+        </div>
+        <div class="col-lg-4 text-center border border-warning bg-dark text-white rounded-pill">
+            <h4 class="text py-5"><i class="fa fa-eye"></i> Montly Visit - 54000</h4>
+        </div>
+    </div>  
+</div>
+<!--  counters ends -->
+
+<div class="container py-4">
+    <div class="row align-items-md-stretch">
+        <div class="col-md-6">
+            <div class="h-100 p-5 bg-light border rounded-3">
+                <h2>Linux Tutorials</h2>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugiat nisi quam eius est maiores
+                    similique dicta at perferendis culpa rerum tempora, corporis voluptatem ipsa error natus
+                    officiis quidem iure quis.</p>
+                <a class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold" href="#" role="button">Go For Linux Articles</a>
+            </div>
+
+        </div>
+        <div class="col-md-6">
+            <div class="h-100 p-5 text-white bg-dark rounded-3">
+                <h2>Winodws Tutorials</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae, inventore. Molestias, dolor
+                    sunt illum deserunt dignissimos nisi accusantium natus ipsa tenetur iusto, voluptates,
+                    exercitationem quae corporis maxime perferendis. Fuga, quod?</p>
+                <a class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold" href="#" role="button">Go For Windows Articles</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="bg-dark text-secondary px-4 py-5 text-center mt-2">
+    <div class="py-5">
+        <h1 class="display-5 fw-bold text-white">Find Us On Socials</h1>
+        <div class="col-lg-6 mx-auto">
+            <p class="fs-5 mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit itaque qui et modi
+                nisi asperiores minima, ipsa accusamus cumque optio! Ipsum quam quasi fuga mollitia delectus soluta
+                doloremque in veritatis.</p>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <a class="btn btn-primary btn-lg btn-floating" style="background-color: #ac2bac;" href="https://instagram.com/cleantecharticles" target = '_blank'
+                    role="button"><i class="fa fa-instagram"></i></a>
+                <a class="btn btn-primary btn-lg btn-floating" style="background-color: #0f0c0f;" href="#!"
+                    role="button"><i class="fa fa-github"></i></a>
+
+                <a class="btn btn-primary btn-lg btn-floating" style="background-color: #5a8be7;" href="#!"
+                    role="button"><i class="fa fa-twitter"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
