@@ -10,9 +10,9 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
 
             <ul class="navbar-nav d-grid gap-3 d-md-flex justify-content-md-end" style="margin-right: 20px !important;">
-                <a href="instagram.com" target="_blank"><span class="fa fa-instagram text-white"></span></a>
-                <a href="twitter.com" target="_blank"><span class="fa fa-twitter text-white"></span></a>
-                <a href="github.com" target="_blank"><span class="fa fa-github text-white"></span></a>
+                <a href="https://www.instagram.com/cleantecharticles" target="_blank"><span class="fa fa-instagram text-white"></span></a>
+                <a href="https://twitter.com/cleantechartic1" target="_blank"><span class="fa fa-twitter text-white"></span></a>
+                <a href="https://github.com/cleantecharticles" target="_blank"><span class="fa fa-github text-white"></span></a>
             </ul>
 
             <ul class="navbar-nav">
@@ -26,13 +26,13 @@
                         Software
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Django</a></li>
-                        <li><a class="dropdown-item" href="#">Python</a></li>
-                        <li><a class="dropdown-item" href="#">Cyber Security</a></li>
+                        <li><a class="dropdown-item" href="#">Django Tutorial</a></li>
+                        <li><a class="dropdown-item" href="#">Python Tutorial</a></li>
+                        <li><a class="dropdown-item" href="#">Cyber Security Tutorial</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Blog</a>
+                    <a class="nav-link {% if 'blog' in request.path %}active{% endif %}" href="{% url 'allblogs' %}">Blog</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"

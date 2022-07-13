@@ -5,15 +5,94 @@
 
 {% block content %}
 
-<h1> About Content </h1>
 
-<h1> About Content </h1>
+<br>
+<br>
+<div class="bg-dark text-secondary px-4 py-5 text-center my-3">
+    <div class="py-5">
+        <h1 class="display-5 fw-bold text-white">About Us</h1>
+        <div class="col-lg-6 mx-auto">
+            <p class="fs-5 mb-4">Who We Are?
+                Cleantecharticles.com is a small site that contains tons of articles about technology and English with basic English to more understandable around the world.
+                
+                What You Will Find in This Site?
+                You can find 
+                Python programs with their explanation.
+                General python subject articles such as classes, decorators or basic python for novice visitors. 
+                English learning articles such as weather or verbs or English grammars.
+                CMD and windows articles.
+                on this site.
+                
+                Note: All articles under control to avoid wrong info.</p>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <a class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold" href="#" role="button">Contact Us</a>
+            </div>
+        </div>
+    </div>
+</div>
 
-<h1> About Content </h1>
+{% comment %} Feature {% endcomment %}
 
-<h1> About Content </h1>
+<div class="container px-4 py-5 my-3" id="hanging-icons">
+    <h2 class="pb-2 border-bottom">Hanging icons</h2>
+    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+      <div class="col d-flex align-items-start">
+        <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
+          <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"/></svg>
+        </div>
+        <div>
+          <h2>Featured title</h2>
+          <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+          <a href="#" class="btn btn-primary">
+            Primary button
+          </a>
+        </div>
+      </div>
+      <div class="col d-flex align-items-start">
+        <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
+          <svg class="bi" width="1em" height="1em"><use xlink:href="#cpu-fill"/></svg>
+        </div>
+        <div>
+          <h2>Featured title</h2>
+          <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+          <a href="#" class="btn btn-primary">
+            Primary button
+          </a>
+        </div>
+      </div>
+      <div class="col d-flex align-items-start">
+        <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
+          <svg class="bi" width="1em" height="1em"><use xlink:href="#tools"/></svg>
+        </div>
+        <div>
+          <h2>Featured title</h2>
+          <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+          <a href="#" class="btn btn-primary">
+            Primary button
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<h1> About Content </h1>
+
+<div class="bg-dark text-secondary px-4 py-5 text-center mt-2">
+    <div class="py-5">
+        <h1 class="display-5 fw-bold text-white">{{ home_content.social_sec_title|title }}</h1>
+        <div class="col-lg-6 mx-auto">
+            <p class="fs-5 mb-4">{{ home_content.social_sec_description }}</p>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <a class="btn btn-outline-info btn-lg btn-floating" href="{{ home_content.instagram_url }}" target = '_blank'
+                    role="button"><i class="fa fa-instagram"></i></a>
+                <a class="btn btn-outline-warning btn-lg btn-floating" href="{{ home_content.github_url }}" target = '_blank'
+                    role="button"><i class="fa fa-github"></i></a>
+
+                <a class="btn btn-outline-primary btn-lg btn-floating" href="{{ home_content.twitter_url }}" target = '_blank'
+                    role="button"><i class="fa fa-twitter"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
 
