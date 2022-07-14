@@ -5,7 +5,6 @@ from .models import Post, Category
 def blog(request):
     posts = Post.objects.all().order_by('-created_date')
     categories = Category.objects.all()
-    print(categories)
     context = {
         'posts': posts,
         'categories': categories,

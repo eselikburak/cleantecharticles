@@ -4,20 +4,32 @@
 
 
 {% block content %}
-<div class="container py-4">
-
-    <div class="p-5 mb-4 bg-light rounded-3">
-      <div class="container-fluid py-5">
-        <h1 class="display-5 fw-bold">{{ post.title|title }}</h1>
-        <p class="col-md-8 fs-4">
-            
-                {{ post.content }}
-        </p>
-        <button class="btn btn-outline-primary btn-lg" type="button">Edit</button>
+<br>
+<br>
+<div class="row my-5">
+  <div class="col-lg-2"></div>
+  <div class="col-lg-8 mx-3">
+      <!-- card -->
+      <div class="card">
+        <img src="{{ post.image.url }}" style="width: 28rem;" class="card-img-top mx-auto my-3" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{ post.title|title }}</h5>
+          <p class="card-text">{{ post.content }}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">An item</li>
+        </ul>
+        <div class="card-body">
+          {% if user.is_authenticated and user.user_profile.user_type == 'blog_author' %}
+            <a class="btn btn-outline-warning" href='#' type="button">Edit</a>
+          {% endif %}
+        </div>
       </div>
-    </div>
-
- 
+      <!-- card end -->
+  </div>
+  </div>
+  <div class="col-lg-2"></div>
 </div>
+
 
 {% endblock  %}

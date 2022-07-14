@@ -45,7 +45,7 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
+                    <a class="nav-link {% if 'contact' in request.path %}active{% endif %}" href="{% url 'contact' %}">Contact</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {% if 'about' in request.path %}active{% endif %}" style="margin-right: 20px !important;" href="{% url 'about' %}">About</a>
@@ -55,8 +55,21 @@
                 <a class="btn btn-outline-warning" href="#" role="button">Become Author</a>
                 </li> -->
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ModalForm">Log In</button>
-                    <a class="btn btn-outline-warning" href="#" role="button">Become Author</a>
+                    {% if user.is_authenticated %}
+                        <a class="btn btn-outline-info" href="#" role="button">Hi, {{user.username|upper}}</a>
+                        <a class="btn btn-outline-danger" href="#" role="button">Sing Out</a>
+                        {% if user.user_profile.user_type == 'blog_author'%}
+                            <a class="btn btn-outline-warning" href="#" role="button">Blog Author</a>
+                        {% elif user.user_profile.user_type == 'tutorial_author' %}
+                            <a class="btn btn-outline-warning" href="#" role="button">Tutorial Author</a>
+                        {% else %}
+                            <a class="btn btn-outline-warning" href="#" role="button">Become Author</a>
+                        {% endif %}
+                    {% else %}
+                        <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#ModalForm">Sing in</button>
+                        <a class="btn btn-outline-primary" href="#" role="button">Sing Up</a>
+                    {% endif %}
+                    
                 </div>
 
             

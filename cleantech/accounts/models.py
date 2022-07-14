@@ -10,7 +10,8 @@ USER_TYPE = [
 DEFAULT_USER_TYPE = 'reader'
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, 
+    user = models.OneToOneField(User,
+                                related_name="user_profile",
                                 null=True, 
                                 on_delete=models.CASCADE)
 

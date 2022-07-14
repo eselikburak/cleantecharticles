@@ -55,13 +55,13 @@
 <div class="container">
     <div class="row py-3 ">
         <div class="col-lg-4 text-center bg-dark border border-warning text-white rounded-pill">
-            <h4 class="text py-5"><i class="fa fa-pencil"></i> Authors - 4</h4>
+            <h4 class="text py-5"><i class="fa fa-pencil"></i> Authors - {{num_of_authors}}</h4>
         </div>
         <div class="col-lg-4 text-center border border-warning rounded-pill">
             <h4 class="text py-5"><i class="fa fa-book"></i> Articles - 124</h4>
         </div>
         <div class="col-lg-4 text-center border border-warning bg-dark text-white rounded-pill">
-            <h4 class="text py-5"><i class="fa fa-eye"></i> Montly Visit - 54000</h4>
+            <h4 class="text py-5"><i class="fa fa-eye"></i> Montly Visit - 5400</h4>
         </div>
     </div>  
 </div>
@@ -73,7 +73,7 @@
             <div class="h-100 p-5 bg-light border rounded-3">
                 <h2>{{ home_content.tut3_title|title }}</h2>
                 <p>{{ home_content.tut3_description }}</p>
-                <a class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold" href="#" role="button">Go For Linux Articles</a>
+                <a class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold" href="{% url 'blog_as_category' 'linux' %}" role="button">Go For Linux Articles</a>
             </div>
 
         </div>
@@ -81,7 +81,7 @@
             <div class="h-100 p-5 text-white bg-dark rounded-3">
                 <h2>{{ home_content.tut4_title|title }}</h2>
                 <p>{{ home_content.tut4_description }}</p>
-                <a class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold" href="#" role="button">Go For Windows Articles</a>
+                <a class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold" href="{% url 'blog_as_category' 'windows' %}" role="button">Go For Windows Articles</a>
             </div>
         </div>
     </div>
