@@ -1,12 +1,15 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load humanize %}
+
 {% block title %} Blog {% endblock title %}
 
 {% block content %}
 <br>
 <br>
 <br>
-<div class="container px-4 my-4">
+<br>
+{% comment %} <div class="container px-4 my-4">
     <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
@@ -69,50 +72,10 @@
             <span class="visually-hidden">Next</span>
         </button>
     </div>
-</div>
+</div> {% endcomment %}
 
 <div class="container px-5">
     <div class="row mx-4">
-        <div class="col-lg-9">
-            <div class="row row-cols-1 row-cols-md-3 g-4">
-                <div class="col">
-                  <div class="card h-100">
-                    <img src="{% static 'images/_py.jpg' %}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    </div>
-                    <div class="card-footer">
-                      <small class="text-muted">Last updated 3 mins ago</small>
-                    </div>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="card h-100">
-                    <img src="{% static 'images/_py.jpg' %}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                    </div>
-                    <div class="card-footer">
-                      <small class="text-muted">Last updated 3 mins ago</small>
-                    </div>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="card h-100">
-                    <img src="{% static 'images/_py.jpg' %}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                    </div>
-                    <div class="card-footer">
-                      <small class="text-muted">Last updated 3 mins ago</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
-        </div>
         <div class="col-lg-3 my-3">
             <form class="d-flex">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -120,51 +83,56 @@
             </form>
             <hr>
             <ul class="list-group" title="categories">
-                <a href="" class="list-group-item">First Item</a>
-                <a href="" class="list-group-item">Second Item</a>
-                <a href="" class="list-group-item">Third Item</a>
-                <a href="" class="list-group-item">Forth Item</a>
+                {% for category in categories %}
+                    <a href="{% url 'blog_as_category' category.slug %}" class="list-group-item">{{ category.name }}</a>
+                {% endfor %}
             </ul>
 
             <hr>
             <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <div class="card" style="width: 18rem;">
-                            <img src="{% static 'images/_py.jpg' %}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up
-                                    the bulk of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                    {% for latest in latest_posts %}
+                        <div class="carousel-item {% if forloop.counter == 1 %}active{% endif %}">
+                            <div class="card" style="width: 18rem;">
+                                <img src="{{ latest.image.url }}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    {% with latest.title|title as post_title %}
+                                    <h5 class="card-title">{{ post_title }}</h5>
+                                    <p class="card-text">{{ latest.content|truncatechars:"100"}}</p>
+                                    <a href="#" class="btn btn-primary">Go This Post</a>
+                                    {% endwith %}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="card" style="width: 18rem;">
-                            <img src="{% static 'images/_py.jpg' %}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up
-                                    the bulk of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="card" style="width: 18rem;">
-                            <img src="{% static 'images/_py.jpg' %}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up
-                                    the bulk of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
-                            </div>
-                        </div>
-                    </div>
+                    {% endfor %}
+
                 </div>
             </div>
         </div>
+        <div class="col-lg-9 my-2">
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                {% for post in posts %}
+                    
+                    <div class="col">
+                        
+                        <div class="card h-100">
+                            <img src="{{ post.image.url }}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ post.title|title }}</h5>
+                                <p class="card-text">{{ post.content|truncatechars:"100" }}</p>
+                                <a class='btn btn-outline-danger' href="{% url 'blog_detail' post.slug %}">Go Post</a>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">{{ post.created_date|naturaltime }}</small>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                {% endfor %}
+            </div>
+        </div>
+
     </div>
 </div>
 

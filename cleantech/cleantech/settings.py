@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'pages.apps.PagesConfig',
     'blog.apps.BlogConfig',
     'tutorial.apps.TutorialConfig',
+    'django.contrib.humanize',
 ]
 
 MIDDLEWARE = [

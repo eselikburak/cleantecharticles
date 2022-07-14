@@ -40,8 +40,8 @@
                         Os
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Linux</a></li>
-                        <li><a class="dropdown-item" href="#">Windows</a></li>
+                        <li><a class="dropdown-item {% if 'linux' in request.path %}active{% endif %}" href="{% url 'blog_as_category' 'linux' %}">Linux</a></li>
+                        <li><a class="dropdown-item {% if 'windows' in request.path %}active{% endif %}" href="{% url 'blog_as_category' 'windows' %}">Windows</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
