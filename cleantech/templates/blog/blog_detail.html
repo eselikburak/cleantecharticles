@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load humanize %}
 
 {% block title %} {{ post.title }} {% endblock  %}
 
@@ -12,18 +13,29 @@
       <!-- card -->
       <div class="card">
         <img src="{{ post.image.url }}" style="width: 28rem;" class="card-img-top mx-auto my-3" alt="...">
+        <ul class="list-group list-group-flush">
+          
+            <li class="list-group-item d-flex justify-content-end" style="display: block;">
+
+              {% for category in  the_post_categories %}
+                <a class="link-info" href="{% url 'blog_as_category' category.slug %}">{{ category.name }}{% if not forloop.last %}, &nbsp; {% endif %}</a>
+              {% endfor %}
+            </li>
+          
+        </ul>
         <div class="card-body">
           <h5 class="card-title">{{ post.title|title }}</h5>
           <p class="card-text">{{ post.content }}</p>
         </div>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">An item</li>
+          <li class="list-group-item">Author: {{ post.author|upper }} {% if post.author.id == user.id %}'You'{% endif %}</li>
         </ul>
         <div class="card-body">
-          {% if user.is_authenticated and user.user_profile.user_type == 'blog_author' %}
+          {% if user.is_authenticated and post.author.id == user.id %}
             <a class="btn btn-outline-warning" href='#' type="button">Edit</a>
           {% endif %}
         </div>
+
       </div>
       <!-- card end -->
   </div>

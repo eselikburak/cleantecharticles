@@ -75,31 +75,35 @@
 </div> {% endcomment %}
 
 <div class="container px-5">
-    <div class="row mx-4">
+    <div class="row d-flex justify-content-center">
         <div class="col-lg-3 my-3">
             <form class="d-flex">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
             <hr>
+            <h5 class="text-center">Categories</h5>
+            <br>
             <ul class="list-group" title="categories">
                 {% for category in categories %}
-                    <a href="{% url 'blog_as_category' category.slug %}" class="list-group-item">{{ category.name }}</a>
+                    <a href="{% url 'blog_as_category' category.slug %}" class="list-group-item customhov {% if category.slug in request.path %}customactive{% endif %}">{{ category.name }}</a>
                 {% endfor %}
             </ul>
 
             <hr>
-            <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+            <h5 class="text-center">Latest Posts</h5>
+            <br>
+            <div id="carouselExampleSlidesOnly" class="carousel slide " data-bs-ride="carousel">
                 <div class="carousel-inner">
                     {% for latest in latest_posts %}
                         <div class="carousel-item {% if forloop.counter == 1 %}active{% endif %}">
-                            <div class="card" style="width: 18rem;">
-                                <img src="{{ latest.image.url }}" class="card-img-top" alt="...">
-                                <div class="card-body">
+                            <div class="card my-auto" style="width: 18rem;">
+                                <img src="{{ latest.image.url }}" style="width: 12rem;" class="card-img-top mx-auto" alt="...">
+                                <div class="card-body text-center">
                                     {% with latest.title|title as post_title %}
                                     <h5 class="card-title">{{ post_title }}</h5>
                                     <p class="card-text">{{ latest.content|truncatechars:"100"}}</p>
-                                    <a href="#" class="btn btn-primary">Go This Post</a>
+                                    <a href="{% url 'blog_detail' latest.slug %}" class="btn btn-outline-danger">Get Post</a>
                                     {% endwith %}
                                 </div>
                             </div>
@@ -114,13 +118,13 @@
                 {% for post in posts %}
                     
                     <div class="col">
-                        
+                       
                         <div class="card h-100">
                             <img src="{{ post.image.url }}" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">{{ post.title|title }}</h5>
                                 <p class="card-text">{{ post.content|truncatechars:"100" }}</p>
-                                <a class='btn btn-outline-danger' href="{% url 'blog_detail' post.slug %}">Go Post</a>
+                                <a class='btn btn-outline-danger' href="{% url 'blog_detail' post.slug %}">Get Post</a>
                             </div>
                             <div class="card-footer">
                                 <small class="text-muted">{{ post.created_date|naturaltime }}</small>

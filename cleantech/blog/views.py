@@ -26,6 +26,7 @@ def blog_as_category(request, category_slug):
 def blog_detail(request, post_slug):
     post = Post.objects.get(slug=post_slug)
     context = {
-        'post': post
+        'post': post,
+        'the_post_categories': post.categories.all()
     }
     return render(request, 'blog/blog_detail.html', context)
