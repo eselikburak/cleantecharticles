@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}{{post.title}}{% endblock %}
+
+
+{% block content %}
+<br>
+<br>
+<br>
+
+<div class="container">
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <form action="" method="POST">{% csrf_token %}
+                <div class="mb-3 mt-5">
+                    <label for="title" class="form-label">Post Title</label>
+                    <input type="text" class="form-control" id="title" name="title" placeholder="Post Title">
+                </div>
+                <div class="mb-3">
+                    <label for="content" class="form-label">Post Content</label>
+                    <textarea class="form-control" rows="6" id="content" name="content"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Choose Post Image</label>
+                    <input class="form-control" type="file" id="image" name="image">
+                </div>
+                <div class="mb-3">
+                    <label for="is_available" class="form-check-label">Is Available</label>
+                    <input class="form-check-input" type="checkbox" id="is_available" name="is_available" checked>
+                </div>
+                <div class="mb-3">
+                    <label for="categories" class="form-check-label">Catogories</label>
+                    <select class="form-select" id="categories" multiple aria-label="multiple select example" name="categories">
+                        <option value="0">Android</option>
+                        <option value="1">Python</option>
+                        <option value="2">Windows</option>
+                        <option value="3">Software</option>
+                      </select>
+                </div>
+                <div class="mb-3 d-flex justify-content-end">
+                    <button type="submit" class="btn btn-outline-primary">Update</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-2"></div>
+    </div>
+</div>
+
+{% endblock %}

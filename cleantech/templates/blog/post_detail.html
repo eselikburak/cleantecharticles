@@ -32,7 +32,7 @@
         </ul>
         <div class="card-body">
           {% if user.is_authenticated and post.author.id == user.id %}
-            <a class="btn btn-outline-warning" href='#' type="button">Edit</a>
+            <a class="btn btn-outline-warning" href="{% url 'post_update' post.id %}" type="button">Edit</a>
           {% endif %}
         </div>
 

@@ -103,7 +103,7 @@
                                     {% with latest.title|title as post_title %}
                                     <h5 class="card-title">{{ post_title }}</h5>
                                     <p class="card-text">{{ latest.content|truncatechars:"100"}}</p>
-                                    <a href="{% url 'blog_detail' latest.slug %}" class="btn btn-outline-danger">Get Post</a>
+                                    <a href="{% url 'post_detail' latest.slug %}" class="btn btn-outline-danger">Get Post</a>
                                     {% endwith %}
                                 </div>
                             </div>
@@ -124,7 +124,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">{{ post.title|title }}</h5>
                                 <p class="card-text">{{ post.content|truncatechars:"100" }}</p>
-                                <a class='btn btn-outline-danger' href="{% url 'blog_detail' post.slug %}">Get Post</a>
+                                <a class='btn btn-outline-danger' href="{% url 'post_detail' post.slug %}">Get Post</a>
                             </div>
                             <div class="card-footer">
                                 <small class="text-muted">{{ post.created_date|naturaltime }}</small>
