@@ -62,7 +62,11 @@
                     {% if user.is_authenticated %}
                         <a class="btn btn-outline-info" href="#" title='Get Your Profile Page' role="button">Hi,
                             {{user.username|upper}}</a>
-                        <a class="btn btn-outline-danger" href="#" role="button">Sing Out</a>
+                        <a class="btn btn-outline-danger" href="javascript:{document.getElementById('logout').submit()}" role="button">Sing Out</a>
+                        <form action="{% url 'logout' %}" method="POST" id="logout">
+                            {% csrf_token %}
+                            <input type="hidden">
+                        </form>
                         {% if user.user_profile.user_type == 'blog_author'%}
                             <a class="btn btn-outline-warning" href="#" role="button">Blog Author</a>
                         {% elif user.user_profile.user_type == 'tutorial_author' %}
@@ -71,7 +75,7 @@
                             <a class="btn btn-outline-warning" href="#" role="button">Become Author</a>
                         {% endif %}
                     {% else %}
-                        <button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
+                        <button type="button" class="btn btn-outline-success" id="signin" data-bs-toggle="modal"
                             data-bs-target="#ModalForm">Sing in</button>
                         <a class="btn btn-outline-primary" href="#" role="button">Sing Up</a>
                     {% endif %}

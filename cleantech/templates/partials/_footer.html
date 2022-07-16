@@ -12,14 +12,28 @@
   </div>
 </footer>
 
-{% if user.is_anonymous %}
+
+
 <!-- Modal Form -->
+
 <div class="modal fade" id="ModalForm" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <!-- Login Form -->
-      <form action="">
+        <div>
+        {% if messages %}
+
+          {% for message in messages %}
+              <div id="msg" class="alert alert-{{message.tags}}">
+                {{message}}
+              </div> 
+          {% endfor %}
+        </div>
+        {% endif %}
+      <form action="{% url 'login' %}" method="POST">
+        {% csrf_token %}
         <div class="modal-header">
+          
           <h5 class="modal-title">Sign in Form</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
@@ -40,11 +54,10 @@
           </div>
         </div>
         <div class="modal-footer pt-4">
-          <button type="button" class="btn btn-success mx-auto w-100">Sign in</button>
+          <button type="submit" class="btn btn-success mx-auto w-100">Sign in</button>
         </div>
         <p class="text-center">Not yet account, <a href="#">Sign Up</a></p>
       </form>
     </div>
   </div>
 </div>
-{% endif %}

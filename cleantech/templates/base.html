@@ -4,25 +4,25 @@
 <html lang="en">
 
 <head>
-
+    
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    
     <link rel="shortcut icon" href="{% static 'images/icons8-internet-96.png' %}" type="image/x-icon" />
-
+    
     {% comment %} fonts {% endcomment %}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
+    
     <!-- Bootstrap CSS -->
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-
-        <style>
+    
+    
+    <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
             text-anchor: middle;
@@ -30,42 +30,56 @@
             -moz-user-select: none;
             user-select: none;
         }
-
+        
         @media (min-width: 768px) {
             .bd-placeholder-img-lg {
-            font-size: 3.5rem;
+                font-size: 3.5rem;
             }
         }
-        </style>
-
+    </style>
+    
     <title>{% block title %} {% endblock %}| CTA</title>
-
+    
     <style rel="stylesheet"></style>
-
+    
 </head>
 
 <body>
-
+    
     {% include 'partials/_navbar.html' %}
-
-
+    
+    
     {% block content %}
     
     {% endblock %}
-
+    
     {% include 'partials/_footer.html' %}
-
+    
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
-        crossorigin="anonymous"></script>
+    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+    crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
         crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
-    <script>
+    {% if messages %}
+        
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $("#signin").trigger('click'); 
+            });
 
+            
+            if ($('#msg')) {
+                setTimeout(() => {
+                $('#msg').remove();
+                }, 5000);
+            };
+        </script>
 
-    </script>
+    {% endif %}
+        
 
 </body>
 
