@@ -64,19 +64,32 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
     {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'info' %}
+                <script type="text/javascript">
+                    $(document).ready(function(){
+                        $("#signin").trigger('click'); 
+                    });
         
-        <script type="text/javascript">
-            $(document).ready(function(){
-                $("#signin").trigger('click'); 
-            });
+                    
+                    if ($('#msgsign')) {
+                        setTimeout(() => {
+                            $('#msgsign').remove();
+                        }, 4000);
+                    };
+                </script>
+            {% elif message.tags == 'success'%}
+                <script type="text/javascript">
+                    if ($('msgcontact')){
+                        setTimeout(() => {
+                            $('#msgcontact').remove();
+                        }, 4000)
+                    }
+                </script>
+            {% endif %}
 
-            
-            if ($('#msg')) {
-                setTimeout(() => {
-                $('#msg').remove();
-                }, 5000);
-            };
-        </script>
+        {% endfor %}
+
 
     {% endif %}
         

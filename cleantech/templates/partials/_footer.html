@@ -24,9 +24,11 @@
         {% if messages %}
 
           {% for message in messages %}
-              <div id="msg" class="alert alert-{{message.tags}}">
-                {{message}}
-              </div> 
+            {% if message.tags == 'info' %}
+                <div id="msgsign" class="alert alert-{{message.tags}}">
+                  {{message}}
+                </div> 
+            {% endif %}
           {% endfor %}
         </div>
         {% endif %}
