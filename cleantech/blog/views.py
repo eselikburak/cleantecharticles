@@ -1,4 +1,4 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import PostForm
 from .models import Post, Category
@@ -26,7 +26,7 @@ def blog_as_category(request, category_slug):
     return render(request, 'blog/blog.html', context)
 
 def post_detail(request, post_slug):
-    post = Post.objects.get(is_available=True, slug=post_slug)
+    post = get_object_or_404(Post, is_available=True, slug=post_slug)
     context = {
         'post': post,
         'the_post_categories': post.categories.all()
@@ -36,7 +36,7 @@ def post_detail(request, post_slug):
 
 @login_required
 def post_update(request, pk):
-    post = Post.objects.get(pk=pk)
+    post = get_object_or_404(Post, pk=pk)
 
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES, instance=post)
@@ -46,7 +46,11 @@ def post_update(request, pk):
             post.author = request.user
             post.publish()
 
-            return redirect('post_detail', post_slug=post.slug)
+            # if author make deactivate the post 
+            if post.is_available == False:
+                return redirect('allposts')
+            else:
+                return redirect('post_detail', post_slug=post.slug)
     #categories = Category.objects.all()
     else: 
         form = PostForm(instance=post)
