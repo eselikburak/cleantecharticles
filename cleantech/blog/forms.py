@@ -1,17 +1,15 @@
 
 from django import forms
 from .models import Post
+from ckeditor.fields import RichTextFormField
 
 class PostForm(forms.ModelForm):
     title = forms.CharField(widget=forms.widgets.TextInput(attrs={
         'class': 'form-control',
         'placeholder': 'Post Title',
     }))
-    content = forms.CharField(widget=forms.widgets.Textarea(attrs={
-        'class': 'form-control',
-        'placeholder': 'Post Content',
-        'rows': '16',
-    }))
+    content = RichTextFormField()
+    
     image = forms.ImageField(widget=forms.widgets.ClearableFileInput(attrs={
         'class':'form-control',
     }))

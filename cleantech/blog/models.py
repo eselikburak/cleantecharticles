@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.text import slugify
 from django.utils import timezone
+from ckeditor.fields import RichTextField
 
 class Category(models.Model):
     name = models.CharField(max_length=50, null=True)
@@ -20,7 +21,7 @@ class Tag(models.Model):
 class Post(models.Model):
     author = models.ForeignKey(User, null=False, on_delete=models.CASCADE, verbose_name='Author')
     title = models.CharField(max_length=200, unique=True, verbose_name='Title')
-    content = models.TextField(blank=True, verbose_name='Blog Content')
+    content = RichTextField(blank=True, null=True)
     created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)
     image = models.ImageField(upload_to='images/blog/%Y/%m/%d/')

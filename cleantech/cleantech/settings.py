@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'tutorial.apps.TutorialConfig',
     'django.contrib.humanize',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [

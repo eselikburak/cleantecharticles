@@ -102,7 +102,7 @@
                                 <div class="card-body text-center">
                                     {% with latest.title|title as post_title %}
                                     <h5 class="card-title">{{ post_title }}</h5>
-                                    <p class="card-text">{{ latest.content|truncatechars:"100"}}</p>
+                                    <p class="card-text">{{ latest.content|truncatechars:"100"|safe}}</p>
                                     <a href="{% url 'post_detail' latest.slug %}" class="btn btn-outline-danger">Get Post</a>
                                     {% endwith %}
                                 </div>
@@ -123,7 +123,7 @@
                             <img src="{{ post.image.url }}" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">{{ post.title|title }}</h5>
-                                <p class="card-text">{{ post.content|truncatechars:"100" }}</p>
+                                <p class="card-text">{{ post.content|truncatechars:"100"|safe }}</p>
                                 <a class='btn btn-outline-danger' href="{% url 'post_detail' post.slug %}">Get Post</a>
                             </div>
                             <div class="card-footer">
