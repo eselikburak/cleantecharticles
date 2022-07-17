@@ -138,3 +138,13 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# To make ckeditor responsive add the bellow code and
+# delete display: inline-block insede the env/lib/site-packeges/ckeditor/widget.html
+CKEDITOR_CONFIGS = {
+    'default': {
+        'width': 'auto',
+        'height': 'auto',      
+    },
+}
