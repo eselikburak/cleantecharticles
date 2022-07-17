@@ -8,22 +8,22 @@
 <br>
 <br>
 
-<div class="container">
+{% comment %} <div class="container">
     <div class="row">
         <div class="col-2"></div>
         <div class="col-8">
             <form action="" method="POST">{% csrf_token %}
                 <div class="mb-3 mt-5">
                     <label for="title" class="form-label">Post Title</label>
-                    <input type="text" class="form-control" id="title" name="title" placeholder="Post Title">
+                    <input type="text" class="form-control" id="title" name="title" value="{{post.title}}" placeholder="Post Title">
                 </div>
                 <div class="mb-3">
                     <label for="content" class="form-label">Post Content</label>
-                    <textarea class="form-control" rows="6" id="content" name="content"></textarea>
+                    <textarea class="form-control" rows="6" id="content" name="content">{{post.content}}</textarea>
                 </div>
                 <div class="mb-3">
                     <label for="image" class="form-label">Choose Post Image</label>
-                    <input class="form-control" type="file" id="image" name="image">
+                    <input class="form-control" type="file" id="image" value="{{post.image.url}} "name="image">
                 </div>
                 <div class="mb-3">
                     <label for="is_available" class="form-check-label">Is Available</label>
@@ -32,10 +32,9 @@
                 <div class="mb-3">
                     <label for="categories" class="form-check-label">Catogories</label>
                     <select class="form-select" id="categories" multiple aria-label="multiple select example" name="categories">
-                        <option value="0">Android</option>
-                        <option value="1">Python</option>
-                        <option value="2">Windows</option>
-                        <option value="3">Software</option>
+                        {% for cat in categories %}
+                            <option value="{{forloop.counter}}" {% if cat in post_cats %}selected{% endif %}>{{cat}}</option>
+                        {% endfor %}
                       </select>
                 </div>
                 <div class="mb-3 d-flex justify-content-end">
@@ -45,6 +44,23 @@
         </div>
         <div class="col-2"></div>
     </div>
+</div> {% endcomment %}
+
+
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
+                    {{ form.as_p }}
+                <div class="mb-3 d-flex justify-content-end">
+                    <button type="submit" class="btn btn-outline-primary">Update</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-2"></div>
+    </div>
 </div>
+
 
 {% endblock %}
