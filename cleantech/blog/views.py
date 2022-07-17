@@ -41,9 +41,14 @@ def post_update(request, pk):
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES, instance=post)
 
+        # if form.has_changed():
+        #     print('Some changes has occourd!')
+
         if form.is_valid():
+            
             post = form.save(commit=False)
             post.author = request.user
+            post.categories.set(form.cleaned_data['categories'])
             post.publish()
 
             # if author make deactivate the post 
