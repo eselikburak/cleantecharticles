@@ -3,10 +3,11 @@ from django.contrib.auth import logout, authenticate, login
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from .models import Profile
 
 
 def user_register(request):
-    #TODO When a new user created must take the profile user_type
+    #TODO When a new user created must take the profile user_type #solved
     if request.user.is_authenticated:
         return redirect('home')
         
@@ -14,12 +15,12 @@ def user_register(request):
         return redirect('home')
 
     elif request.method == "POST":
-        username = request.POST["username"]
-        email = request.POST["email"]
-        firstname = request.POST["firstname"]
-        lastname = request.POST["lastname"]
-        password = request.POST["password"]
-        repassword = request.POST["repassword"]
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        firstname = request.POST.get('firstname')
+        lastname = request.POST.get('lastname')
+        password = request.POST('password')
+        repassword = request.POST.get('repassword')
 
         if password != repassword:
             messages.add_message(request, messages.ERROR, 'Passwords are not same!')
@@ -38,6 +39,9 @@ def user_register(request):
                                             password=password)
             user.save()
 
+            # Assign profile user_type
+            Profile.objects.create(user=user)
+
             messages.add_message(request, messages.SUCCESS, 'Account created you can, Sing in!')
             return redirect("login")
 
@@ -48,8 +52,14 @@ def user_login(request):
         password = request.POST.get('password')
         user = authenticate(request, username=username, password=password)
         if user is not None:
-            login(request, user)
-            return redirect('home')
+            if user.is_active:
+                login(request, user)
+                return redirect('home')
+            else:
+                #TODO Doesn't seem this message on screen, solve this
+                messages.add_message(request, messages.INFO, 'Account is Desibled!')
+                return redirect('home')
+                
         else:
             messages.add_message(request, messages.INFO, 'Password or Username invalid!')
             return redirect('home')
