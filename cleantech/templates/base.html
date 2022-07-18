@@ -52,7 +52,7 @@
     {% if messages %}
         {% for message in messages %}
             <!-- This is for delete if there is login unseccefful message -->
-            {% if message.tags == 'info' %}
+            {% if message.tags == 'info' or message.tags == 'success' %}
                 <script type="text/javascript">
                     $(document).ready(function(){
                         $("#signin").trigger('click'); 
@@ -62,6 +62,20 @@
                     if ($('#msgsign')) {
                         setTimeout(() => {
                             $('#msgsign').remove();
+                        }, 4000);
+                    };
+                </script>
+
+            {% elif message.tags == 'error' %}
+                <script type="text/javascript">
+                    $(document).ready(function(){
+                        $("#signup").trigger('click'); 
+                    });
+        
+                    
+                    if ($('#msgsignup')) {
+                        setTimeout(() => {
+                            $('#msgsignup').remove();
                         }, 4000);
                     };
                 </script>

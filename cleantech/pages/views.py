@@ -29,6 +29,8 @@ class ContactView(SuccessMessageMixin, FormView):
     success_url = reverse_lazy('contact')
     success_message = 'We Received Your Request'
 
+    #TODO if user is auth get him/her infos
+
     def form_valid(self, form):
         form.save()
         return super().form_valid(form)

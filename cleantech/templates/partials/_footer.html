@@ -1,3 +1,5 @@
+
+
 <footer class="py-3 bg-dark">
   <div class="container ">
     <ul class="nav justify-content-center border-bottom pb-3 mb-3">
@@ -14,24 +16,30 @@
 
 
 
-<!-- Modal Form -->
+<!-- Login Form -->
 
-<div class="modal fade" id="ModalForm" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="loginForm" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <!-- Login Form -->
-        <div>
+      <div>
         {% if messages %}
 
-          {% for message in messages %}
-            {% if message.tags == 'info' %}
+        {% for message in messages %}
+
+            {% if message.tags == 'success'%}
+                <div id="msgsign" class="alert alert-{{message.tags}}">
+                  {{message}}
+                </div> 
+            {% elif message.tags == 'info' %}
                 <div id="msgsign" class="alert alert-{{message.tags}}">
                   {{message}}
                 </div> 
             {% endif %}
           {% endfor %}
-        </div>
+        
         {% endif %}
+      </div>
       <form action="{% url 'login' %}" method="POST">
         {% csrf_token %}
         <div class="modal-header">
@@ -59,6 +67,71 @@
           <button type="submit" class="btn btn-success mx-auto w-100">Sign in</button>
         </div>
         <p class="text-center">Not yet account, <a href="#">Sign Up</a></p>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<!-- Register Form-->
+<div class="modal fade" id="RegisterForm" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <!-- Register Form -->
+      <div>
+        {% if messages %}
+
+          {% for message in messages %}
+            {% if message.tags == 'error' %}
+                <div id="msgsignup" class="alert alert-danger">
+                  {{message}}
+                </div> 
+            {% endif %}
+          {% endfor %}
+        
+        {% endif %}
+
+      </div>
+
+      <form action="{% url 'register' %}" method="POST">
+        {% csrf_token %}
+        <div class="modal-header">
+          
+          <h5 class="modal-title">Sing up Form</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="upfirstname">First Name<span class="text-danger">*</span></label>
+            <input type="text" name="firstname" class="form-control" id="upfirstname" required placeholder="Enter First Name">
+          </div>
+          <div class="mb-3">
+            <label for="uplastname">Last Name<span class="text-danger">*</span></label>
+            <input type="text" name="lastname" class="form-control" id="uplastname" required placeholder="Enter Last Name">
+          </div>
+          <div class="mb-3">
+            <label for="upusername">Username<span class="text-danger">*</span></label>
+            <input type="text" name="username" class="form-control" id="upusername" required placeholder="Enter Username">
+          </div>
+          <div class="mb-3">
+            <label for="upemail">Email<span class="text-danger">*</span></label>
+            <input type="email" name="email" class="form-control" id="upemail" required placeholder="Enter Your Email">
+          </div>
+          
+          <div class="mb-3">
+            <label for="uppassword">Password<span class="text-danger">*</span></label>
+            <input type="password" name="password" class="form-control" id="uppassword" required placeholder="Enter Password">
+          </div>
+          <div class="mb-3">
+            <label for="repassword">Password Again<span class="text-danger">*</span></label>
+            <input type="password" name="repassword" class="form-control" id="repassword" required placeholder="Enter Password Again">
+          </div>
+        </div>
+        <div class="modal-footer pt-4">
+          <button type="submit" class="btn btn-success mx-auto w-100">Sing Up</button>
+        </div>
+        <p class="text-center">Have account, <a href="#">Sign in</a></p>
       </form>
     </div>
   </div>
