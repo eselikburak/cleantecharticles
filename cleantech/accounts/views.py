@@ -47,14 +47,18 @@ def user_register(request):
             return redirect("login")
 
 def user_login(request):
-
+    
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
         user = authenticate(request, username=username, password=password)
+        remember_me = request.POST.get('remember_me')
         if user is not None:
             if user.is_active:
                 login(request, user)
+                # For if user check the remember_me checkbox
+                if not remember_me:
+                    request.session.set_expiry(0)
                 return redirect('home')
             else:
                 #TODO Doesn't seem this message on screen, solve this
