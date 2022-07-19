@@ -19,7 +19,7 @@ def user_register(request):
         email = request.POST.get('email')
         firstname = request.POST.get('firstname')
         lastname = request.POST.get('lastname')
-        password = request.POST('password')
+        password = request.POST.get('password')
         repassword = request.POST.get('repassword')
 
         if password != repassword:
@@ -37,6 +37,7 @@ def user_register(request):
                                             first_name=firstname,
                                             last_name=lastname,
                                             password=password)
+                                            # TODO password accepting without any validating!
             user.save()
 
             # Assign profile user_type
