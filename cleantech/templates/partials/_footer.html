@@ -45,7 +45,7 @@
           <div class="modal-header">
             
             <h5 class="modal-title">Sign in Form</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" id="closesin" aria-label="Close"></button>
           </div>
           <div class="modal-body">
             <div class="mb-3">
@@ -58,7 +58,7 @@
               <input type="password" name="password" class="form-control" id="Password" placeholder="Enter Password">
             </div>
             <div class="mb-3">
-              <input class="form-check-input" type="checkbox" name="remember_me" id="remember">
+              <input class="form-check-input" type="checkbox" name="remember_me" id="remember" checked>
               <label class="form-check-label" for="remember">Remember Me</label>
               <a href="#" class="float-end">Forgot Password</a>
             </div>
@@ -66,7 +66,15 @@
           <div class="modal-footer pt-4">
             <button type="submit" class="btn btn-success mx-auto w-100">Sign in</button>
           </div>
-          <p class="text-center">Not yet account, <a href="#">Sign Up</a></p>
+          <p class="text-center">Not yet account, <strong id="goSignUp" style="color: blue; cursor: pointer;">Sign up</strong></p>
+          <script>
+            document.getElementById("goSignUp").addEventListener("click", fungoSignUp)
+
+            function fungoSignUp(){
+              document.getElementById("closesin").click()
+              document.getElementById("signup").click()
+            }
+          </script>
         </form>
       </div>
     </div>
@@ -99,7 +107,7 @@
           <div class="modal-header">
             
             <h5 class="modal-title">Sing up Form</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" id="closesup" aria-label="Close"></button>
           </div>
           <div class="modal-body">
             <div class="mb-3">
@@ -131,7 +139,15 @@
           <div class="modal-footer pt-4">
             <button type="submit" class="btn btn-success mx-auto w-100">Sing Up</button>
           </div>
-          <p class="text-center">Have account, <a href="#">Sign in</a></p>
+          <p class="text-center">Have an account, <strong id="goSignIn" style="color: blue; cursor: pointer;">Sign in</strong></p>
+          <script>
+            document.getElementById("goSignIn").addEventListener("click", fungoSignIn)
+
+            function fungoSignIn(){
+              document.getElementById("closesup").click()
+              document.getElementById("signin").click()
+            }
+          </script>
         </form>
       </div>
     </div>

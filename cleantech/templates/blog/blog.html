@@ -5,143 +5,56 @@
 {% block title %} Blog {% endblock title %}
 
 {% block content %}
-<br>
-<br>
-<br>
-<br>
-{% comment %} <div class="container px-4 my-4">
-    <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <div class="card text-center mx-4 bg-dark text-white">
-                    <div class="card-header">
-                        Populer Posts
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Special title treatment</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.
-                        </p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                    <div class="card-footer text-muted">
-                        2 days ago
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <div class="card text-center mx-4 bg-dark text-white">
-                    <div class="card-header">
-                        Populer Posts
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Special title treatment</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.
-                        </p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                    <div class="card-footer text-muted">
-                        2 days ago
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <div class="card text-center mx-4 bg-dark text-white">
-                    <div class="card-header">
-                        Populer Posts
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Special title treatment</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.
-                        </p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                    <div class="card-footer text-muted">
-                        2 days ago
-                    </div>
-                </div>
-            </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
-            data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
-            data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
-</div> {% endcomment %}
 
-<div class="container px-5">
-    <div class="row d-flex justify-content-center">
-        <div class="col-lg-3 my-3">
-            <form class="d-flex shadow-lg">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
-            <hr>
-            <h5 class="text-center">Categories</h5>
-            <br>
-            <ul class="list-group shadow-lg" title="categories">
-                {% for category in categories %}
-                    <a href="{% url 'blog_as_category' category.slug %}" class="list-group-item customhov {% if category.slug in request.path %}customactive{% endif %}">{{ category.name }}</a>
-                {% endfor %}
-            </ul>
-
-            <hr>
-            <h5 class="text-center">Latest Posts</h5>
-            <br>
-            <div id="carouselExampleSlidesOnly" class="carousel slide shadow-lg" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    {% for latest in latest_posts %}
-                        <div class="carousel-item {% if forloop.counter == 1 %}active{% endif %}">
-                            <div class="card my-auto" style="width: 18rem;">
-                                <img src="{{ latest.image.url }}" style="width: 12rem;" class="card-img-top mx-auto" alt="...">
-                                <div class="card-body text-center">
-                                    {% with latest.title|title as post_title %}
-                                    <h5 class="card-title">{{ post_title }}</h5>
-                                    <p class="card-text">{{ latest.content|truncatechars:"100"|safe}}</p>
-                                    <a href="{% url 'post_detail' latest.slug %}" class="btn btn-outline-danger">Get Post</a>
-                                    {% endwith %}
-                                </div>
-                            </div>
-                        </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="container px-5">
+        <div class="row d-flex justify-content-center">
+            <div class="col-lg-3 my-3">
+                <form class="d-flex mx-4 shadow-lg">
+                    <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit"><span><i class="fa fa-search"></i></span></button>
+                </form>
+                <hr>
+                <h5 class="text-center">Categories</h5>
+                <br>
+                <ul class="list-group shadow-lg mx-4" title="categories">
+                    {% for category in categories %}
+                        <a href="{% url 'blog_as_category' category.slug %}" class="list-group-item customhov {% if category.slug in request.path %}customactive{% endif %}">{{ category.name }}</a>
                     {% endfor %}
+                </ul>
 
-                </div>
             </div>
-        </div>
-        <div class="col-lg-9 my-2">
-            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-                {% for post in posts %}
-                    
-                    <div class="col">
-                       
-                        <div class="card shadow-lg h-100" href="{% url 'post_detail' post.slug %}">
-                            <a href="{% url 'post_detail' post.slug %}" class="link-secondary">
-                                <img src="{{ post.image.url }}" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{ post.title|title }}</h5>
-                                        <p class="card-text">{{ post.content|truncatechars:"100"|safe }}</p>
-                                        {% comment %} <a class='btn btn-outline-danger' href="{% url 'post_detail' post.slug %}">Get Post</a> {% endcomment %}
+            <div class="col-lg-9 my-2">
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                    {% for post in posts %}
+                        
+                        <div class="col">
+                        
+                            <div class="card shadow-lg h-100" href="{% url 'post_detail' post.slug %}">
+                                <a href="{% url 'post_detail' post.slug %}" class="link-secondary">
+                                    <img src="{{ post.image.url }}" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ post.title|title }}</h5>
+                                            <p class="card-text">{{ post.content|truncatechars:"100"|safe }}</p>
+                                            {% comment %} <a class='btn btn-outline-danger' href="{% url 'post_detail' post.slug %}">Get Post</a> {% endcomment %}
+                                        </div>
+                                    <div class="card-footer">
+                                        <small class="text-muted">{{ post.created_date|naturaltime }}</small>
+                                
                                     </div>
-                                <div class="card-footer">
-                                    <small class="text-muted">{{ post.created_date|naturaltime }}</small>
+                                </a>
+                            </div>
                             
-                                </div>
-                            </a>
                         </div>
                         
-                    </div>
-                    
-                {% endfor %}
+                    {% endfor %}
+                </div>
             </div>
+
         </div>
-
     </div>
-</div>
-
 
 {% endblock content %}
