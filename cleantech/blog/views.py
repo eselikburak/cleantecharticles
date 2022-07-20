@@ -1,3 +1,5 @@
+from django.core.paginator import Paginator
+
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import PostForm
@@ -6,22 +8,27 @@ from django.contrib.auth.decorators import login_required
 
 def blog(request):
     posts = Post.objects.filter(is_available=True).order_by('-created_date')
+    paginator = Paginator(posts, 1) # show 3 contact per page.
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     categories = Category.objects.all()
+
     context = {
-        'posts': posts,
+        'page_obj': page_obj,
         'categories': categories,
-        'latest_posts': posts[0:3]
     }
     return render(request, 'blog/blog.html', context)
 
 def blog_as_category(request, category_slug):
     posts = Post.objects.filter(is_available=True, categories__slug=category_slug)
+    paginator = Paginator(posts, 1) # show 3 contact per page.
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     categories = Category.objects.all()
-    all_posts = Post.objects.all().order_by('-created_date')
+    
     context = {
-        'posts': posts,
+        'page_obj': page_obj,
         'categories': categories,
-        'latest_posts': all_posts[0:3] #use filter 
     }
     return render(request, 'blog/blog.html', context)
 
