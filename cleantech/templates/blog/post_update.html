@@ -1,123 +1,42 @@
-{% extends 'base.html' %}
+{% extends 'accounts/base_dashboard.html' %}
 
-{% block title %}{{post.title}}{% endblock %}
+{% block title %} {{ post.title }}| Update {% endblock %}
 
+{% block dashboard_content %}
 
-{% block content %}
-<br>
-<br>
-<br>
-
-{% comment %} <div class="container">
-    <div class="row">
-        <div class="col-2"></div>
-        <div class="col-8">
-            <form action="" method="POST">{% csrf_token %}
-                <div class="mb-3 mt-5">
-                    <label for="title" class="form-label">Post Title</label>
-                    <input type="text" class="form-control" id="title" name="title" value="{{post.title}}"
-                        placeholder="Post Title">
-                </div>
-                <div class="mb-3">
-                    <label for="content" class="form-label">Post Content</label>
-                    <textarea class="form-control" rows="6" id="content" name="content">{{post.content}}</textarea>
-                </div>
-                <div class="mb-3">
-                    <label for="image" class="form-label">Choose Post Image</label>
-                    <input class="form-control" type="file" id="image" value="{{post.image.url}} " name="image">
-                </div>
-                <div class="mb-3">
-                    <label for="is_available" class="form-check-label">Is Available</label>
-                    <input class="form-check-input" type="checkbox" id="is_available" name="is_available" checked>
-                </div>
-                <div class="mb-3">
-                    <label for="categories" class="form-check-label">Catogories</label>
-                    <select class="form-select" id="categories" multiple aria-label="multiple select example"
-                        name="categories">
-                        {% for cat in categories %}
-                        <option value="{{forloop.counter}}" {% if cat in post_cats %}selected{% endif %}>{{cat}}
-                        </option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="mb-3 d-flex justify-content-end">
-                    <button type="submit" class="btn btn-outline-primary">Update</button>
-                </div>
-            </form>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <form action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.media }}
+                    <div class="mb-3 mt-2">
+                        <label for="id_title" class="form-label">Post Title</label>
+                        {{ form.title }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_content" class="form-label">Post Content</label>
+                        
+                        {{ form.content }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_image" class="form-label">Choose Post Image</label>
+                        {{ form.image }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_is_available" class="form-check-label">Is Available</label>
+                        {{ form.is_available }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_categories" class="form-check-label">Catogories</label>
+                        {{ form.categories }}
+                    </div>
+                    <div class="mb-3 d-flex justify-content-end">
+                        <button type="submit" class="btn btn-outline-primary">Update</button>
+                    </div>
+                </form>
+            </div>
         </div>
-        <div class="col-2"></div>
     </div>
-</div> {% endcomment %}
 
-
-<div class="container">
-    <div class="row mt-5">
-        <div class="col-lg-2"></div>
-        <div class="col-lg-8">
-            <form action="" method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{ form.media }}
-                <div class="mb-3 mt-2">
-                    <label for="id_title" class="form-label">Post Title</label>
-                    {{ form.title }}
-                </div>
-                <div class="mb-3">
-                    <label for="id_content" class="form-label">Post Content</label>
-                    
-                    {{ form.content }}
-                </div>
-                <div class="mb-3">
-                    <label for="id_image" class="form-label">Choose Post Image</label>
-                    {{ form.image }}
-                </div>
-                <div class="mb-3">
-                    <label for="id_is_available" class="form-check-label">Is Available</label>
-                    {{ form.is_available }}
-                </div>
-                <div class="mb-3">
-                    <label for="id_categories" class="form-check-label">Catogories</label>
-                    {{ form.categories }}
-                </div>
-                <div class="mb-3 d-flex justify-content-end">
-                    <button type="submit" class="btn btn-outline-primary">Update</button>
-                </div>
-            </form>
-        </div>
-        <div class="col-lg-2"></div>
-    </div>
-</div>
-
-
-{% endblock %}
-
-{% comment %} 
-<form action="" method="POST" enctype="multipart/form-data"><input type="hidden" name="csrfmiddlewaretoken"
-        value="UgdplIFr4IwvTvDh9CvXMCgEfr7IAooSieAuUjFYw5R89DXo17oceuIg582P0hI2">
-    <li><label for="id_title">Title:</label> <input type="text" name="title" value="What is Python Programing Language?"
-            maxlength="200" required id="id_title"></li>
-    <li><label for="id_content">Blog Content:</label> <textarea name="content" cols="40" rows="10" id="id_content">
-Yaygın inancın tersine, Lorem Ipsum rastgele sözcüklerden oluşmaz. Kökleri M.Ö. 45 tarihinden bu yana klasik Latin edebiyatına kadar uzanan 2000 yıllık bir geçmişi vardır. Virginia&#x27;daki Hampden-Sydney College&#x27;dan Latince profesörü test1</textarea>
-    </li>
-    <li><label for="id_image">Image:</label> Currently: <a
-            href="/media/images/blog/2022/07/17/zan-X_JsI_9Hl7o-unsplash.jpg">images/blog/2022/07/17/zan-X_JsI_9Hl7o-unsplash.jpg</a><br>
-        Change:
-        <input type="file" name="image" accept="image/*" id="id_image">
-    </li>
-    <li><label for="id_is_available">Is Available:</label> <input type="checkbox" name="is_available"
-            id="id_is_available" checked></li>
-    <li><label for="id_categories">Categories:</label> <select name="categories" required id="id_categories" multiple>
-            <option value="1" selected>Software</option>
-
-            <option value="2">Python</option>
-
-            <option value="3">Linux</option>
-
-            <option value="4">Windows</option>
-
-            <option value="5">Command Prompt</option>
-
-        </select></li>
-    <div class="mb-3 d-flex justify-content-end">
-        <button type="submit" class="btn btn-outline-primary">Update</button>
-    </div>
-</form> {% endcomment %}
+{% endblock  %}

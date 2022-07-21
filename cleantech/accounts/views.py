@@ -3,6 +3,8 @@ from django.contrib.auth import logout, authenticate, login
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+
+from blog.models import Post
 from .models import Profile
 
 
@@ -77,10 +79,62 @@ def user_logout(request):
     logout(request)
     return redirect('home')
 
-
-def dashboard(request, username):
+@login_required
+def user_dashboard(request):
     current_user = request.user
-    if get_object_or_404(User, username=str(username)) == current_user:
-        pass
+    return redirect("my-posts", username=current_user.username)
+
+
+@login_required
+def user_dashboard_posts(request, username):
+    if request.user.username == username:
+        username = str(username) #TODO Add more security if necessary
+        posts = Post.objects.filter(author__username=username, is_available=True)
+        if posts:
+            context = {
+                'posts': posts
+            }
+            return render(request, 'accounts/dashboard_posts.html', context)
+        else:
+            # Add message
+            return redirect('my-dashboard')
+    else:
+        return redirect('my-dashboard')
+
+@login_required
+def user_dashboard_drafts(request, username):
+    if request.user.username == username:
+        username = str(username) #TODO Add more security if necessary
+        posts = Post.objects.filter(author__username=username, is_available=False)
+        if posts:
+            context = {
+                'posts': posts
+            }
+            return render(request, 'accounts/dashboard_posts.html', context)
+        else:
+            # Add message
+            return redirect('my-dashboard')
+    else:
+        return redirect('my-dashboard')
+
+@login_required
+def post_detail_dashboard(request, username, post_slug):
+    if request.user.username == username:
+        post = get_object_or_404(Post, author__username=str(username), slug=post_slug)
+        context = {
+            'post': post
+        }
+        return render(request, 'accounts/post_detail.html', context)
+    else:
+        return redirect('my-dashboard')
+    
+def user_profile(request, username):
+    current_user = request.user
+    user = get_object_or_404(User, username=str(username))
+    if user.id == current_user.id: # if this statement is true user looking own profile page.
+        context = {
+            'user': user
+         }
+        return render(request, 'accounts/profile.html', context)
     else:
         pass

@@ -31,14 +31,15 @@
 </head>
 
 <body>
-    
+
+        
+
     {% include 'partials/_navbar.html' %}
-    
-    
     {% block content %}
+
     
     {% endblock %}
-    
+
     {% include 'partials/_footer.html' %}
     
     {% comment %} Download Bootstrap 5 Requirements JS files {% endcomment %}
@@ -95,6 +96,7 @@
 
     {% endif %}
 
+    <!-- This is for post_update.html -->
     <script>
         $( "#id_categories" ).addClass("form-select");
     </script>

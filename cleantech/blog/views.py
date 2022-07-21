@@ -20,7 +20,7 @@ def blog(request):
     return render(request, 'blog/blog.html', context)
 
 def blog_as_category(request, category_slug):
-    posts = Post.objects.filter(is_available=True, categories__slug=category_slug)
+    posts = Post.objects.filter(is_available=True, categories__slug=category_slug).order_by('-created_date')
     paginator = Paginator(posts, 1) # show 3 contact per page.
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -60,13 +60,14 @@ def post_update(request, pk):
 
             # if author make deactivate the post 
             if post.is_available == False:
-                return redirect('allposts')
+                return redirect('my-posts', username=request.user.username)
             else:
-                return redirect('post_detail', post_slug=post.slug)
+                return redirect('post_detail_dashboard', username=request.user.username, post_slug=post.slug)
     #categories = Category.objects.all()
     else: 
         form = PostForm(instance=post)
     context = {
         'form': form,
+        'post': post,
     }
     return render(request, 'blog/post_update.html', context)

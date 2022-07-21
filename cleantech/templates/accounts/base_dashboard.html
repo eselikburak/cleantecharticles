@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} {{user.username|title}}'s Dashboard {% endblock title %}
+
+{% block content %}
+
+
+<br>
+<br>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-4 text-center " style="">
+            <!-- dashboard sidebar-->
+            <ul class="list-group shadow d-flex align-items-center bg-dark" style="">
+                <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark my-auto" style="width: auto; position: absoulute;">
+                    <a href="{% url 'my-dashboard' %}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                        <i class="fa fa-tachometer fa-2x"></i>
+                        <span class="fs-4">&nbsp;{{user.username|title}}'s Dashboard</span>
+                    </a>
+                    <hr>
+                    <ul class="nav nav-pills flex-column mb-auto">
+                        <li class="nav-item  {% if 'posts' in request.path %}customactive{% endif %}">
+                            <a href="{% url 'my-posts' user.username %}" class="nav-link customhov text-white" aria-current="page">
+                                <i class="fa fa-book"></i>&nbsp;
+                                My {% if user.user_profile.user_type == 'blog_author' %}Blog's {% elif user.user_profile.user_type == 'tutorials_author' %}Tutorial's {% endif %}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link text-white customhov">
+                                <i class="fa fa-plus-circle"></i>&nbsp;
+                                Add New Article
+                            </a>
+                        </li>
+                        <li class="{% if 'drafts' in request.path %}customactive{% endif %}">
+                            <a href="{% url 'my-drafts' user.username %}" class="nav-link text-white customhov ">
+                                <i class="fa fa-anchor"></i>&nbsp;
+                                My Drafts
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link text-white customhov">
+                                <i class="fa fa-cog"></i>&nbsp;
+                                Settings
+                            </a>
+                        </li>
+                    </ul>
+                    <hr>
+    
+                    <div class="dropdown">
+                        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+                            id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+                            <strong>{{user.username|title}}</strong>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+                            <li><a class="dropdown-item" href="#">New Article</a></li>
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Sign out</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </ul>
+            <!-- dashboard sidebar ens -->
+
+
+        </div>
+        <div class="col-lg-8">
+            {% block dashboard_content %}
+            
+            {% endblock  %}
+        </div>
+    </div>
+</div>
+
+<br>
+<br>
+
+{% endblock content %}

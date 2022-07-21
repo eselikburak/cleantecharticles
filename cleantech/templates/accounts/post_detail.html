@@ -1,0 +1,49 @@
+{% extends 'accounts/base_dashboard.html' %}
+{% load humanize %}
+
+{% block dashboard_content %}
+
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-10">
+        <!-- card -->
+        <div class="card">
+          <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8"><img src="{{ post.image.url }}" style="width:100%; height:auto;" class="card-img-top mx-auto my-3" alt="..."></div>
+            <div class="col-2"></div>
+          </div>
+          <ul class="list-group list-group-flush">
+            
+              <li class="list-group-item d-flex justify-content-end" style="display: block;">
+
+                {% for category in  the_post_categories %}
+                  <a class="link-info" href="{% url 'blog_as_category' category.slug %}">{{ category.name }}{% if not forloop.last %}, &nbsp; {% endif %}</a>
+                {% endfor %}
+              </li>
+            
+          </ul>
+          <div class="card-body">
+            <h5 class="card-title">{{ post.title|title }}</h5>
+            <p class="card-text">{{ post.content|safe }}</p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Author: {{ post.author|upper }} {% if post.author.id == user.id %}'You'{% endif %}</li>
+          </ul>
+          <div class="card-body">
+            {% if user.is_authenticated and post.author.id == user.id %}
+              <a class="btn btn-outline-warning float-end" href="{% url 'post_update' post.id %}" type="button">Edit</a>
+            {% endif %}
+          </div>
+
+        </div>
+        <!-- card end -->
+    </div>
+    </div>
+    <div class="col-lg-1"></div>
+  </div>
+</div>
+
+{% endblock  %}
