@@ -12,7 +12,7 @@ class PostForm(forms.ModelForm):
     
     image = forms.ImageField(widget=forms.widgets.ClearableFileInput(attrs={
         'class':'form-control',
-    }))
+    }), required=False)
     is_available = forms.BooleanField(widget=forms.CheckboxInput(attrs={
         'class': 'form-check-input',
     }), required=False)
@@ -20,7 +20,3 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ['title', 'content', 'image', 'is_available', 'categories']
-
-        def __init__(self, *args, **kwargs):
-            super().__init__(*args, **kwargs)
-            self.fields['categories'].widget.attrs.update({'class': 'form-select'})

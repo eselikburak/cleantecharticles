@@ -26,8 +26,8 @@
                                 My {% if user.user_profile.user_type == 'blog_author' %}Blog's {% elif user.user_profile.user_type == 'tutorials_author' %}Tutorial's {% endif %}
                             </a>
                         </li>
-                        <li>
-                            <a href="#" class="nav-link text-white customhov">
+                        <li class="{% if 'post-new' in request.path %}customactive{% endif %}">
+                            <a href="{% url 'post_new' %}" class="nav-link text-white customhov">
                                 <i class="fa fa-plus-circle"></i>&nbsp;
                                 Add New Article
                             </a>

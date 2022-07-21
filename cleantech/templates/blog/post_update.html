@@ -10,27 +10,7 @@
                 <form action="" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ form.media }}
-                    <div class="mb-3 mt-2">
-                        <label for="id_title" class="form-label">Post Title</label>
-                        {{ form.title }}
-                    </div>
-                    <div class="mb-3">
-                        <label for="id_content" class="form-label">Post Content</label>
-                        
-                        {{ form.content }}
-                    </div>
-                    <div class="mb-3">
-                        <label for="id_image" class="form-label">Choose Post Image</label>
-                        {{ form.image }}
-                    </div>
-                    <div class="mb-3">
-                        <label for="id_is_available" class="form-check-label">Is Available</label>
-                        {{ form.is_available }}
-                    </div>
-                    <div class="mb-3">
-                        <label for="id_categories" class="form-check-label">Catogories</label>
-                        {{ form.categories }}
-                    </div>
+                    {{ form.as_p }}
                     <div class="mb-3 d-flex justify-content-end">
                         <button type="submit" class="btn btn-outline-primary">Update</button>
                     </div>

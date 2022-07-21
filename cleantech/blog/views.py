@@ -71,3 +71,25 @@ def post_update(request, pk):
         'post': post,
     }
     return render(request, 'blog/post_update.html', context)
+
+def post_new(request):
+    if request.method == 'POST':
+        form = PostForm(request.POST, files=request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.publish()
+            post.categories.set(form.cleaned_data['categories']) 
+            # This is(categories) adding after saveing beacuse this needs post id!
+
+            if post.is_available == False:
+                return redirect('my-drafts', username=request.user.username)
+            else:
+                return redirect('post_detail_dashboard', username=request.user.username, post_slug=post.slug)
+    else:
+        print('else')
+        form = PostForm()
+    context = {
+        'form': form,
+    }
+    return render(request, 'blog/post_new.html', context)
