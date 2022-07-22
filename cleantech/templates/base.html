@@ -49,52 +49,6 @@
     {% comment %} Download jquery {% endcomment %}
     <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
 
-    {% if messages %}
-        {% for message in messages %}
-            <!-- This is for delete if there is login unseccefful message -->
-            {% if message.tags == 'info' or message.tags == 'success' %}
-                <script type="text/javascript">
-                    $(document).ready(function(){
-                        $("#signin").trigger('click'); 
-                    });
-        
-                    
-                    if ($('#msgsign')) {
-                        setTimeout(() => {
-                            $('#msgsign').remove();
-                        }, 4000);
-                    };
-                </script>
-
-            {% elif message.tags == 'error' %}
-                <script type="text/javascript">
-                    $(document).ready(function(){
-                        $("#signup").trigger('click'); 
-                    });
-        
-                    
-                    if ($('#msgsignup')) {
-                        setTimeout(() => {
-                            $('#msgsignup').remove();
-                        }, 4000);
-                    };
-                </script>
-
-            <!-- This is for delete if there is contant message -->
-            {% elif message.tags == 'success'%}
-                <script type="text/javascript">
-                    if ($('msgcontact')){
-                        setTimeout(() => {
-                            $('#msgcontact').remove();
-                        }, 4000)
-                    }
-                </script>
-            {% endif %}
-
-        {% endfor %}
-
-
-    {% endif %}
 
     <!-- This is for post_update.html -->
     <script>

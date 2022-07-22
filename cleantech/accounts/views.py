@@ -4,88 +4,84 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
+from .forms import LoginForm, RegisterForm
 from blog.models import Post
 from .models import Profile
 
 
+
 def user_register(request):
-    #TODO When a new user created must take the profile user_type #solved
+
     if request.user.is_authenticated:
         return redirect('home')
-        
-    if request.method == "GET":
-        return redirect('home')
-
-    elif request.method == "POST":
-        username = request.POST.get('username')
-        email = request.POST.get('email')
-        firstname = request.POST.get('firstname')
-        lastname = request.POST.get('lastname')
-        password = request.POST.get('password')
-        repassword = request.POST.get('repassword')
-
-        if password != repassword:
-            messages.add_message(request, messages.ERROR, 'Passwords are not same!')
-            return redirect('home')
-        elif User.objects.filter(username=username).exists():
-            messages.add_message(request, messages.ERROR, 'Username invalid!')
-            return redirect('home')
-        elif User.objects.filter(email=email).exists():
-            messages.add_message(request, messages.ERROR, 'Email invalid!')
-            return redirect('home')
-        else:
-            user = User.objects.create_user(username=username, 
-                                            email=email,
-                                            first_name=firstname,
-                                            last_name=lastname,
-                                            password=password)
-                                            # TODO password accepting without any validating!
-            user.save()
-
-            # Assign profile user_type
-            Profile.objects.create(user=user)
-
-            messages.add_message(request, messages.SUCCESS, 'Account created you can, Sing in!')
-            return redirect("login")
-
-def user_login(request):
     
     if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password)
-        remember_me = request.POST.get('remember_me')
-        if user is not None:
-            if user.is_active:
-                login(request, user)
-                # For if user check the remember_me checkbox
-                if not remember_me:
-                    request.session.set_expiry(0)
-                return redirect('home')
-            else:
-                #TODO Doesn't seem this message on screen, solve this
-                messages.add_message(request, messages.INFO, 'Account is Desibled!')
-                return redirect('home')
-                
-        else:
-            messages.add_message(request, messages.INFO, 'Password or Username invalid!')
-            return redirect('home')
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Account has been created, You can LOGIN')
+            return redirect('login')
+    
     else:
+        form = RegisterForm()
+
+    context = {
+        'form': form
+    }
+
+    return render(request, 'accounts/register.html', context)
+
+
+def user_login(request):
+
+    if request.user.is_authenticated:
+        messages.info(request, 'You already login!')
+        #TODO show this message on the screen!
         return redirect('home')
 
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
 
-@login_required
+        
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            remember_me = form.cleaned_data['remember_me']
+            user = authenticate(request, username=username, password=password)
+            if not remember_me:
+                request.session.set_expiry(0)
+
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    return redirect('home')
+
+                else:
+                    messages.info(request, 'Disabled Account')
+
+            else:
+                messages.info(request, 'Username or password is invalid!')
+
+    else:
+        form = LoginForm()
+
+    return render(request, 'accounts/login.html', {'form':form})
+
+    
+
+
+@login_required(login_url='login')
 def user_logout(request):
     logout(request)
     return redirect('home')
 
-@login_required
+@login_required(login_url='login')
 def user_dashboard(request):
     current_user = request.user
     return redirect("my-posts", username=current_user.username)
 
 
-@login_required
+@login_required(login_url='login')
 def user_dashboard_posts(request, username):
     if request.user.username == username:
         username = str(username) #TODO Add more security if necessary
@@ -101,7 +97,7 @@ def user_dashboard_posts(request, username):
     else:
         return redirect('my-dashboard')
 
-@login_required
+@login_required(login_url='login')
 def user_dashboard_drafts(request, username):
     if request.user.username == username:
         username = str(username) #TODO Add more security if necessary
@@ -117,7 +113,7 @@ def user_dashboard_drafts(request, username):
     else:
         return redirect('my-dashboard')
 
-@login_required
+@login_required(login_url='login')
 def post_detail_dashboard(request, username, post_slug):
     if request.user.username == username:
         post = get_object_or_404(Post, author__username=str(username), slug=post_slug)

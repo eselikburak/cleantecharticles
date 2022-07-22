@@ -75,11 +75,11 @@
                             <a class="btn btn-outline-warning" href="#" role="button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Become Author</a>
                         {% endif %}
                     {% else %}
-                        <button type="button" class="btn btn-outline-success" id="signin" data-bs-toggle="modal"
-                            data-bs-target="#loginForm"><i class="fa fa-sign-in" aria-hidden="true"></i> Sign in</button>
+                        <a type="button" class="btn btn-outline-success" href="{% url 'login' %}" id="signin"
+                            ><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp; Log in</a>
 
-                        <button type="button" class="btn btn-outline-primary" id="signup" data-bs-toggle="modal"
-                            data-bs-target="#RegisterForm"><i class="fa fa-address-book-o" aria-hidden="true"></i> Sign up</button>
+                        <a type="button" class="btn btn-outline-primary" id="signup" href="{% url 'register' %}"
+                           ><i class="fa fa-address-book-o" aria-hidden="true"></i>&nbsp; Register</a>
                     {% endif %}
 
                 </div>
