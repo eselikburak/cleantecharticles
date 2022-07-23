@@ -13,7 +13,7 @@ class ContactForm(forms.ModelForm):
     message = forms.CharField(widget=forms.Textarea(attrs={
         'class': 'form-control',
         'placeholder': 'Your Message',
-        'row': '6',
+        'rows': '6',
     }))
 
     class Meta:
