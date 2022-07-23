@@ -27,13 +27,10 @@ class ContactView(SuccessMessageMixin, FormView):
     template_name = 'pages/contact.html'
     form_class = ContactForm
     success_url = reverse_lazy('contact')
-    success_message = 'We Received Your Request'
+    success_message = 'We received your message.'
 
     #TODO if user is auth get him/her infos
 
     def form_valid(self, form):
         form.save()
         return super().form_valid(form)
-
-# def contact(request):
-#     return render(request, 'pages/contact.html')<

@@ -6,10 +6,16 @@
 
 {% block content %}
 
+
     <br>
-    <br>
-    <br>
-    <br>
+    <div class="bg-dark text-secondary px-4 py-5 text-center my-3">
+        <div class="py-5">
+            <h1 id="blog-title" class="display-5 fw-bold text-white">Blog</h1>
+            <div class="col-lg-6 mx-auto">
+                <p class="fs-5 mb-4"></p>
+            </div>
+        </div>
+    </div>
     <div class="container px-5">
         <div class="row d-flex justify-content-center">
             <div class="col-lg-3 my-3">
@@ -20,7 +26,7 @@
                 <hr>
                 <h5 class="text-center">Categories</h5>
                 <br>
-                <ul class="list-group shadow-lg mx-4" title="categories">
+                <ul class="list-group shadow-lg mx-4" id="category_list" title="categories">
                     {% for category in categories %}
                         <a href="{% url 'blog_as_category' category.slug %}" class="list-group-item customhov {% if category.slug in request.path %}customactive{% endif %}">{{ category.name }}</a>
                     {% endfor %}
@@ -30,7 +36,7 @@
             <div class="col-lg-9 my-2">
                     {% if messages %}
                         {% for message in messages %}
-                            <div class="alert alert-{{message.tags}}">
+                            <div id="message" class="alert alert-{{message.tags}}">
                                 {{message}}
                             </div>
                         {% endfor %}
@@ -90,3 +96,12 @@
     </div>
 
 {% endblock content %}
+
+{% block custom_script %}
+    {% comment %} Change blog blog title if slected a category. {% endcomment %}
+    if ($("a.list-group-item").is('.customactive')){
+        var current_category = $("a.list-group-item.customactive").text()
+        $("#blog-title").text("Blog - " + current_category);
+        $(document).prop('title', "Blog - " + current_category + " | cta")
+    }
+{% endblock %}

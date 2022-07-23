@@ -25,7 +25,7 @@
 
                     {% for message in messages %}
                         {% if message.tags == 'success' %}
-                            <div id='msgcontact' class="alert alert-{{message.tags}}">
+                            <div id='message' class="alert alert-{{message.tags}}">
                                 {{message}}
                             </div>
                         {% endif %}

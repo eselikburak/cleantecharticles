@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
     <!-- title -->
-    <title>{% block title %} {% endblock %}| CTA</title>
+    <title>{% block title %} {% endblock %}| cta</title>
     
 
     {% comment %} Custom Style {% endcomment %}
@@ -57,9 +57,21 @@
         $("#id_title").on("input", function() {
             $(document).prop('title', this.value);
         });
-        
+
+        {% comment %} Delete if there is a message on the page! {% endcomment %}
+        if ($("#message")){
+            setTimeout(() => {
+                $("#message").remove();
+            }, 4000)
+        }
+
     </script>
-        
+
+    <script>
+        {% block custom_script %}
+
+        {% endblock  %}
+    </script>
 
 </body>
 
