@@ -2,6 +2,8 @@ from django.core.paginator import Paginator
 
 from django.shortcuts import get_object_or_404, redirect, render
 
+from accounts.models import Profile
+
 from .forms import PostForm
 from .models import Post, Category
 from django.contrib.auth.decorators import login_required
@@ -73,23 +75,27 @@ def post_update(request, pk):
     return render(request, 'blog/post_update.html', context)
 
 def post_new(request):
-    if request.method == 'POST':
-        form = PostForm(request.POST, files=request.FILES)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.author = request.user
-            post.publish()
-            post.categories.set(form.cleaned_data['categories']) 
-            # This is(categories) adding after saveing beacuse this needs post id!
+    if Profile.objects.get(user=request.user).user_type == 'blog_author':
+        if request.method == 'POST':
+            form = PostForm(request.POST, files=request.FILES)
+            if form.is_valid():
+                post = form.save(commit=False)
+                post.author = request.user
+                post.publish()
+                post.categories.set(form.cleaned_data['categories']) 
+                # This is(categories) adding after saveing beacuse this needs post id!
 
-            if post.is_available == False:
-                return redirect('my-drafts', username=request.user.username)
-            else:
-                return redirect('post_detail_dashboard', username=request.user.username, post_slug=post.slug)
+                if post.is_available == False:
+                    return redirect('my-drafts', username=request.user.username)
+                else:
+                    return redirect('post_detail_dashboard', username=request.user.username, post_slug=post.slug)
+        else:
+            print('else')
+            form = PostForm()
+        context = {
+            'form': form,
+        }
+        return render(request, 'blog/post_new.html', context)
     else:
-        print('else')
-        form = PostForm()
-    context = {
-        'form': form,
-    }
-    return render(request, 'blog/post_new.html', context)
+        #TODO add message to the user
+        return redirect('allposts')

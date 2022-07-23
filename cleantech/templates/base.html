@@ -53,6 +53,11 @@
     <!-- This is for post_update.html -->
     <script>
         $( "#id_categories" ).addClass("form-select");
+
+        $("#id_title").on("input", function() {
+            $(document).prop('title', this.value);
+        });
+        
     </script>
         
 

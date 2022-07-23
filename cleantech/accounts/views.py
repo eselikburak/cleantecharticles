@@ -19,11 +19,22 @@ def user_register(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()
+            username = form.cleaned_data["username"]
+            # When a new user created assign the user_type to the new user.
+            user = User.objects.get(username=username)
+            Profile.objects.create(user=user)
+            print(username)
             messages.success(request, 'Account has been created, You can LOGIN')
             return redirect('login')
     
     else:
         form = RegisterForm()
+
+    # def assing_user_type() -> None:
+    #     
+    #     user_type.save()
+
+    # assing_user_type()
 
     context = {
         'form': form
@@ -83,35 +94,48 @@ def user_dashboard(request):
 
 @login_required(login_url='login')
 def user_dashboard_posts(request, username):
-    if request.user.username == username:
-        username = str(username) #TODO Add more security if necessary
-        posts = Post.objects.filter(author__username=username, is_available=True)
-        if posts:
-            context = {
-                'posts': posts
-            }
-            return render(request, 'accounts/dashboard_posts.html', context)
+    if Profile.objects.get(user=request.user).user_type == 'blog_author':
+
+        if request.user.username == username:
+            username = str(username) #TODO Add more security if necessary
+            posts = Post.objects.filter(author__username=username, is_available=True)
+            if posts:
+                context = {
+                    'posts': posts
+                }
+                return render(request, 'accounts/dashboard_posts.html', context)
+            else:
+                context = {
+                    'posts': posts
+                }
+                messages.info(request, "You don't have any post!")
+                return render(request, 'accounts/dashboard_posts.html', context)
         else:
-            # Add message
-            return redirect('my-dashboard')
+            return redirect('home')
     else:
-        return redirect('my-dashboard')
+        messages.info(request, "You are not an author!")
+        return redirect('allposts')
+
 
 @login_required(login_url='login')
 def user_dashboard_drafts(request, username):
-    if request.user.username == username:
-        username = str(username) #TODO Add more security if necessary
-        posts = Post.objects.filter(author__username=username, is_available=False)
-        if posts:
-            context = {
-                'posts': posts
-            }
-            return render(request, 'accounts/dashboard_posts.html', context)
+    if Profile.objects.get(user=request.user).user_type == 'blog_author':
+        if request.user.username == username:
+            username = str(username) #TODO Add more security if necessary
+            posts = Post.objects.filter(author__username=username, is_available=False)
+            if posts:
+                context = {
+                    'posts': posts
+                }
+                return render(request, 'accounts/dashboard_posts.html', context)
+            else:
+                # Add message
+                return redirect('my-dashboard')
         else:
-            # Add message
             return redirect('my-dashboard')
     else:
-        return redirect('my-dashboard')
+        messages.info(request, "You are not an author!")
+        return redirect('allposts')
 
 @login_required(login_url='login')
 def post_detail_dashboard(request, username, post_slug):
