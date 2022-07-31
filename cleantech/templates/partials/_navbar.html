@@ -80,7 +80,7 @@
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item" href="javascript:{document.getElementById('logout').submit()}" role="button"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp; Sing Out</a></li>
+                                <li><a class="dropdown-item" href="javascript:{document.getElementById('logout').submit()}" role="button"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp; Log out</a></li>
                                 <form action="{% url 'logout' %}" method="POST" id="logout">
                                     {% csrf_token %}
                                     <input type="hidden">
