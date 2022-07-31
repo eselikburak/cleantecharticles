@@ -34,6 +34,7 @@
           </ul>
           <div class="card-body">
             {% if user.is_authenticated and post.author.id == user.id %}
+              <a class="btn btn-outline-danger float-end mx-3" href="{% url 'post_delete' post.id %}" type="button">Delete</a>
               <a class="btn btn-outline-warning float-end" href="{% url 'post_update' post.id %}" type="button">Edit</a>
             {% endif %}
           </div>

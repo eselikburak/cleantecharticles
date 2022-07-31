@@ -23,18 +23,11 @@ def user_register(request):
             # When a new user created assign the user_type to the new user.
             user = User.objects.get(username=username)
             Profile.objects.create(user=user)
-            print(username)
             messages.success(request, 'Account has been created, You can LOGIN')
             return redirect('login')
     
     else:
         form = RegisterForm()
-
-    # def assing_user_type() -> None:
-    #     
-    #     user_type.save()
-
-    # assing_user_type()
 
     context = {
         'form': form
@@ -46,7 +39,10 @@ def user_register(request):
 def user_login(request):
 
     # This statement might be causes huge vulnerability!
-    redirect_to = request.get_full_path_info().split("next=",1)[1]
+    try:
+        redirect_to = request.get_full_path_info().split("next=",1)[1]
+    except IndexError as err:
+        print(err) #TODO add logging here
 
     if request.user.is_authenticated:
         messages.info(request, 'You already login!')
@@ -101,7 +97,7 @@ def user_dashboard_posts(request, username):
 
         if request.user.username == username:
             username = str(username) #TODO Add more security if necessary
-            posts = Post.objects.filter(author__username=username, is_available=True)
+            posts = Post.objects.filter(author__username=username, is_available=True).order_by('-created_date')
             if posts:
                 context = {
                     'posts': posts
@@ -125,7 +121,7 @@ def user_dashboard_drafts(request, username):
     if Profile.objects.get(user=request.user).user_type == 'blog_author':
         if request.user.username == username:
             username = str(username) #TODO Add more security if necessary
-            posts = Post.objects.filter(author__username=username, is_available=False)
+            posts = Post.objects.filter(author__username=username, is_available=False).order_by('-created_date')
             if posts:
                 context = {
                     'posts': posts

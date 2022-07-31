@@ -1,9 +1,10 @@
+from email import message
 from django.core.paginator import Paginator
 
 from django.shortcuts import get_object_or_404, redirect, render
 
 from accounts.models import Profile
-
+from django.contrib import messages
 from .forms import PostForm
 from .models import Post, Category
 from django.contrib.auth.decorators import login_required
@@ -98,4 +99,17 @@ def post_new(request):
         return render(request, 'blog/post_new.html', context)
     else:
         #TODO add message to the user
+        return redirect('allposts')
+
+
+def post_delete(request, pk):
+    current_user = request.user
+    post = Post.objects.get(id=pk)
+    post_title: str = post.title
+    if current_user.id == post.author.id: # if current user and post author is same person 
+        post.delete()
+        messages.success(request, f'\"{post_title.capitalize()}\" has been deleted!')
+        return redirect('my-posts', username=current_user.username)
+    else:
+        messages.warning(request, f'{post_title.capitalize()} has not been deleted!')
         return redirect('allposts')

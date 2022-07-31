@@ -21,13 +21,13 @@ class Tag(models.Model):
 class Post(models.Model):
     author = models.ForeignKey(User, null=False, on_delete=models.CASCADE, verbose_name='Author')
     title = models.CharField(max_length=200, unique=True, verbose_name='Title')
-    content = RichTextField(blank=True, null=True)
+    content = RichTextField(blank=True, null=True, verbose_name='Content')
     created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)
     image = models.ImageField(upload_to='images/blog/%Y/%m/%d/')
     is_available = models.BooleanField(default=True, verbose_name='Is Available')
-    categories = models.ManyToManyField(Category, null=True, verbose_name='Categories')
-    slug = models.SlugField(blank=True, null=True)
+    categories = models.ManyToManyField(Category, blank=True, verbose_name='Categories')
+    slug = models.SlugField()
 
     def publish(self):
         self.published_date = timezone.now()
