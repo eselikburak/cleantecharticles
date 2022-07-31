@@ -11,47 +11,46 @@
   <div class="py-5">
       <h1 class="display-5 fw-bold text-white">{{post.title|title}}</h1>
       <div class="col-lg-6 mx-auto">
-          <p class="fs-5 mb-4"></p>
+          <p class="mb-3">
+            <div >
+              <ul style="list-style-type: none;">
+                <li class="" style="display: block; float: center;">Author: {{ post.author|upper }} {% if post.author.id == user.id %}'You'{% endif %}</li>
+                <li class="" style="display: block; float: center;">Related Categories: &nbsp;
+
+                  {% for category in  the_post_categories %}
+                    <a class="link-info" href="{% url 'blog_as_category' category.slug %}">{{ category.name }}{% if not forloop.last %}, &nbsp; {% endif %}</a>
+                  {% endfor %}
+                </li>
+                <li class="" style="display: block; float: center;">Created Date: {{ post.created_date|naturaltime }}</li>
+              </ul>
+            </div>
+          </p>
       </div>
   </div>
 </div>
 <div class="container">
   <div class="row my-5">
-    <div class="col-lg-8">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-6 px-3" style="background-color:#faf9f2; border-radius: 5px;">
         <!-- card -->
-        <div class="card">
+        <div class="my-3">
+          <h4 class="">{{ post.title|title }}</h4>
           <div class="row">
             <div class="col-2"></div>
             <div class="col-8"><img src="{{ post.image.url }}" style="width:100%; height:auto;" class="card-img-top mx-auto my-3" alt="..."></div>
             <div class="col-2"></div>
           </div>
-          <ul class="list-group list-group-flush">
-            
-              <li class="list-group-item d-flex justify-content-end" style="display: block;">
 
-                {% for category in  the_post_categories %}
-                  <a class="link-info" href="{% url 'blog_as_category' category.slug %}">{{ category.name }}{% if not forloop.last %}, &nbsp; {% endif %}</a>
-                {% endfor %}
-              </li>
-            
-          </ul>
-
+          <hr>
           
-          <div class="card-body">
-            <h5 class="card-title">{{ post.title|title }}</h5>
-            <p class="card-text">{{ post.content|safe }}</p>
-          </div>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">Author: {{ post.author|upper }} {% if post.author.id == user.id %}'You'{% endif %}</li>
-          </ul>
-          <div class="card-body">
-            {% if user.is_authenticated and post.author.id == user.id %}
-              <a class="btn btn-outline-warning float-end" href="{% url 'post_update' post.id %}" type="button">Edit</a>
-            {% endif %}
+          <div class="">
+            
+            <p class="">{{ post.content|safe }}</p>
           </div>
 
         </div>
         <!-- card end -->
+        <hr>
     </div>
     </div>
     <div class="col-lg-4"></div>

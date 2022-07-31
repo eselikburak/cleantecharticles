@@ -1,4 +1,4 @@
-<nav class="navbar fixed-top py-3 navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar fixed-top py-2 navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
 
         <a class="navbar-brand" href="{% url 'home' %}">cleantecharticles.com</a>
@@ -26,9 +26,9 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        Software
+                        Tutorials
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="#">Django Tutorial</a></li>
                         <li><a class="dropdown-item" href="#">Python Tutorial</a></li>
                         <li><a class="dropdown-item" href="#">Cyber Security Tutorial</a></li>
@@ -43,7 +43,7 @@
                         data-bs-toggle="dropdown" aria-expanded="false">
                         Os
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item {% if 'linux' in request.path %}active{% endif %}"
                                 href="{% url 'blog_as_category' 'linux' %}">Linux</a></li>
                         <li><a class="dropdown-item {% if 'windows' in request.path %}active{% endif %}"
@@ -58,28 +58,41 @@
                     <a class="nav-link {% if 'about' in request.path %}active{% endif %}"
                         style="margin-right: 20px !important;" href="{% url 'about' %}">About</a>
                 </li>
-                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end {% if user.is_authenticated %}mt-2{% endif %}">
                     {% if user.is_authenticated %}
-                        <a class="btn btn-outline-info" href="{% url 'my-dashboard' %}" title='Get Your Dashboard' role="button"><i class="fa fa-user-circle-o" aria-hidden="true"></i> Hi,
-                            {{user.username|upper}}</a>
-                        <a class="btn btn-outline-danger" href="javascript:{document.getElementById('logout').submit()}" role="button"><i class="fa fa-sign-out" aria-hidden="true"></i>Sing Out</a>
-                        <form action="{% url 'logout' %}" method="POST" id="logout">
-                            {% csrf_token %}
-                            <input type="hidden">
-                        </form>
-                        {% if user.user_profile.user_type == 'blog_author'%}
-                            <a class="btn btn-outline-warning" href="#" role="button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Blog Author</a>
-                        {% elif user.user_profile.user_type == 'tutorial_author' %}
-                            <a class="btn btn-outline-warning" href="#" role="button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Tutorial Author</a>
-                        {% else %}
-                            <a class="btn btn-outline-warning" href="#" role="button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Become Author</a>
-                        {% endif %}
+                        <li class="nav-item dropdown">
+                            <a href="#" class="text-white text-decoration-none dropdown-toggle"
+                                id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="https://github.com/mdo.png" alt="" width="26" height="26" class="rounded-circle me-2">
+                                <strong>Hi, {{user.username|title}}</strong>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+                                <li><a class="dropdown-item" href="{% url 'my-dashboard' %}"><i class="fa fa-tachometer" aria-hidden="true"></i>&nbsp; Dashboard</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="fa fa-user" aria-hidden="true"></i>&nbsp; Profile</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="fa fa-cog" aria-hidden="true"></i>&nbsp; Settings</a></li>
+                                {% if user.user_profile.user_type == 'blog_author'%}
+                                <li><a class="dropdown-item" href="#" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp; Blog Author</a></li>
+                                {% elif user.user_profile.user_type == 'tutorial_author' %}
+                                <li><a class="dropdown-item" href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp; Tutorial Author</a></li>
+                                {% else %}
+                                <li><a class="dropdown-item" href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp; Become Author</a></li>
+                                {% endif %}
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="javascript:{document.getElementById('logout').submit()}" role="button"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp; Sing Out</a></li>
+                                <form action="{% url 'logout' %}" method="POST" id="logout">
+                                    {% csrf_token %}
+                                    <input type="hidden">
+                                </form>
+                            </ul>
+                        </li>
                     {% else %}
                         <a type="button" class="btn btn-outline-success" href="{% url 'login' %}?next={{request.path}}" id="signin"
                             ><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp; Log in</a>
 
                         <a type="button" class="btn btn-outline-primary" id="signup" href="{% url 'register' %}"
-                           ><i class="fa fa-address-book-o" aria-hidden="true"></i>&nbsp; Register</a>
+                           ><i class="fa fa-address-book-o" aria-hidden="true"></i>&nbsp; Join</a>
                     {% endif %}
 
                 </div>

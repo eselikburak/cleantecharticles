@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 
 def blog(request):
     posts = Post.objects.filter(is_available=True).order_by('-created_date')
-    paginator = Paginator(posts, 12) # show 3 contact per page.
+    paginator = Paginator(posts, 12) # show 12 contact per page.
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     categories = Category.objects.all()
@@ -23,7 +23,7 @@ def blog(request):
 
 def blog_as_category(request, category_slug):
     posts = Post.objects.filter(is_available=True, categories__slug=category_slug).order_by('-created_date')
-    paginator = Paginator(posts, 12) # show 3 contact per page.
+    paginator = Paginator(posts, 12) # show 12 contact per page.
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     categories = Category.objects.all()
