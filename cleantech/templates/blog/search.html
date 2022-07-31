@@ -10,7 +10,7 @@
     <br>
     <div class="bg-dark text-secondary px-4 py-5 text-center my-3">
         <div class="py-5">
-            <h1 id="blog-title" class="display-5 fw-bold text-white">Blog</h1>
+            <h1 id="blog-title" class="display-5 fw-bold text-white">Blog - {{ search_query }}</h1>
             <div class="col-lg-6 mx-auto">
                 <p class="fs-5 mb-4"></p>
             </div>
@@ -20,8 +20,8 @@
         <div class="row d-flex justify-content-center">
             <div class="col-lg-3 my-3">
                 <form action="{% url 'search' %}" class="d-flex mx-4" method="GET">
-                    <input class="input-text form-control me-2" type="text" placeholder="Find on CTA" name="search">
-                    <input class="btn btn-outline-warning" type="submit" value="Search">
+                    <input class="input-text form-control me-2" type="text" placeholder="Find on CTA: {{ search_query }}" name="search" maxlength="45">
+                    <input class="btn btn-outline-warning" type="submit" value="search">
                   </form>
                 <hr>
                 <h5 class="text-center">Categories</h5>
@@ -44,7 +44,7 @@
                         {% endfor %}
                     {% endif %}
                 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-                    {% for post in page_obj %}
+                    {% for post in posts %}
                         
                         <div class="col d-flex justify-content-center">
                             
@@ -66,28 +66,6 @@
 
 
                 </div>
-            </div>
-
-            <div class="row my-4">
-                <nav>
-                    <ul class="pagination justify-content-end">
-                        
-                            {% if page_obj.has_previous %}
-                                <li class="page-item"><a href="?page=1" class="page-link">First</a></li>
-                                <li class="page-item"><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; </a></li>
-                            {% endif %}
-                    
-                            <li class="page-item">
-                                <a class="page-link customactive text-white"  href="?page={{ page_obj.number }}"> Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</a>
-                            </li>
-                    
-                            {% if page_obj.has_next %}
-                                <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo; </a></li>
-                                <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Last </a></li>
-                            {% endif %}
-                        
-                    </ul>
-                </nav>
             </div>
 
 

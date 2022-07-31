@@ -38,12 +38,6 @@ def user_register(request):
 
 def user_login(request):
 
-    # This statement might be causes huge vulnerability!
-    try:
-        redirect_to = request.get_full_path_info().split("next=",1)[1]
-    except IndexError as err:
-        print(err) #TODO add logging here
-
     if request.user.is_authenticated:
         messages.info(request, 'You already login!')
         #TODO show this message on the screen!
@@ -64,7 +58,7 @@ def user_login(request):
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    return redirect(redirect_to)
+                    return redirect('home')
                 else:
                     messages.info(request, 'Disabled Account')
                     #TODO this message not showing if a user is not active.

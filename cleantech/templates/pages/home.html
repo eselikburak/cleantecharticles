@@ -18,26 +18,26 @@
         </div>
     </div>
 
-    <div class="container py-4">
+    <div class="container py-4 text-center">
         <div class="row d-flex justify-content-center">
             <div class="col-lg-5 my-1">
-                <div class="h-100 p-5 text-white bg-dark rounded-3">
+                <div class="h-100 p-3 bg-light border rounded-3">
                     <h2>{{ home_content.tut1_title|title }}</h2>
                     <p>{{ home_content.tut1_description }}</p>
-                    <a class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold" href="#" role="button">Go For {{ home_content.tut1_title }}</a>
+                    <a class="btn btn-outline-primary btn-lg px-4 me-sm-3 fw-bold" href="#" role="button">Go For {{ home_content.tut1_title }}</a>
                 </div>
             </div>
             <div class="col-lg-5 my-1">
-                <div class="h-100 p-5 bg-light border rounded-3">
+                <div class="h-100 p-3 bg-light border rounded-3">
                     <h2>{{ home_content.tut2_title|title }}</h2>
                     <p>{{ home_content.tut2_description }}</p>
-                    <a class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold" href="#" role="button">Go For {{ home_content.tut2_title }}</a>
+                    <a class="btn btn-outline-primary btn-lg px-4 me-sm-3 fw-bold" href="#" role="button">Go For {{ home_content.tut2_title }}</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="container col-xxl-8 px-4 py-5">
+    <div class="container col-xxl-8 px-2 py-3">
         <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
             <div class="col-10 col-sm-8 col-lg-6 d-flex justify-content-center">
                 <img src="{{ home_content.middle_section_img.url }}" class="d-block mx-lg-auto img-fluid" alt="programmer" width="auto"
@@ -53,34 +53,34 @@
     <!-- counters starts -->
     <div class="container">
         <div class="row py-3 d-flex justify-content-center">
-            <div class="col-lg-3 text-center bg-dark border border-warning text-white rounded-pill">
+            <div class="col-lg-3 text-center bg-light border border-warning rounded-pill">
                 <h4 class="text py-5"><i class="fa fa-pencil"></i> Authors - {{num_of_authors}}</h4>
             </div>
             <div class="col-lg-3 text-center border border-warning rounded-pill mx-2 my-2">
                 <h4 class="text py-5"><i class="fa fa-book"></i> Articles - 12</h4>
             </div>
-            <div class="col-lg-3 text-center border border-warning bg-dark text-white rounded-pill">
+            <div class="col-lg-3 text-center border border-warning bg-light rounded-pill">
                 <h4 class="text py-5"><i class="fa fa-eye"></i> Montly Visit - 5400</h4>
             </div>
         </div>  
     </div>
     <!--  counters ends -->
 
-    <div class="container py-4">
+    <div class="container py-4 text-center">
         <div class="row d-flex justify-content-center">
             <div class="col-lg-5 my-1">
-                <div class="h-100 p-5 bg-light border rounded-3">
+                <div class="h-100 p-3 bg-light border rounded-3">
                     <h2>{{ home_content.tut3_title|title }}</h2>
                     <p>{{ home_content.tut3_description }}</p>
-                    <a class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold" href="{% url 'blog_as_category' 'linux' %}" role="button">Go For Linux Articles</a>
+                    <a class="btn btn-outline-primary btn-lg px-4 me-sm-3 fw-bold" href="{% url 'blog_as_category' 'linux' %}" role="button">Go For Linux Articles</a>
                 </div>
 
             </div>
             <div class="col-lg-5 my-1">
-                <div class="h-100 p-5 text-white bg-dark rounded-3">
+                <div class="h-100 p-3 bg-light border rounded-3">
                     <h2>{{ home_content.tut4_title|title }}</h2>
                     <p>{{ home_content.tut4_description }}</p>
-                    <a class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold" href="{% url 'blog_as_category' 'windows' %}" role="button">Go For Windows Articles</a>
+                    <a class="btn btn-outline-primary btn-lg px-4 me-sm-3 fw-bold" href="{% url 'blog_as_category' 'windows' %}" role="button">Go For Windows Articles</a>
                 </div>
             </div>
         </div>

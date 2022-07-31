@@ -1,4 +1,3 @@
-from email import message
 from django.core.paginator import Paginator
 
 from django.shortcuts import get_object_or_404, redirect, render
@@ -113,3 +112,18 @@ def post_delete(request, pk):
     else:
         messages.warning(request, f'{post_title.capitalize()} has not been deleted!')
         return redirect('allposts')
+
+def search(request):
+    search_query = str(request.GET.get('search'))[0:45]
+    posts = Post.objects.filter(is_available=True, title__contains = search_query)
+    categories = Category.objects.all()
+
+    context = {
+        'posts': posts,
+        'categories': categories,
+        'search_query': search_query
+    }
+
+    if not posts:
+        messages.info(request, f"No Result for {search_query}")
+    return render(request, 'blog/search.html', context)
