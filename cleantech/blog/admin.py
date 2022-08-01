@@ -8,9 +8,12 @@ class PostAdmin(admin.ModelAdmin):
     list_display = ('title', 'is_available', 'author')
     list_filter = ('is_available',)
     search_fields: Sequence[str] = ('title', 'content')
-    prepopulated_fields: Dict[str, Sequence[str]] = {'slug':('title',)}
+    readonly_fields: Sequence[str] = ('slug', 'last_update',)
+    # prepopulated_fields: Dict[str, Sequence[str]] = {'slug':('title',)}
     
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    prepopulated_fields: Dict[str, Sequence[str]] = {'slug':('name',)}
+    readonly_fields: Sequence[str] = ('slug', )
+    list_display = ('name', 'slug')
+    

@@ -9,7 +9,7 @@ from .models import Post, Category
 from django.contrib.auth.decorators import login_required
 
 def blog(request):
-    posts = Post.objects.filter(is_available=True).order_by('-created_date')
+    posts = Post.objects.filter(is_available=True).order_by('-published_date')
     paginator = Paginator(posts, 12) # show 12 contact per page.
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -22,7 +22,7 @@ def blog(request):
     return render(request, 'blog/blog.html', context)
 
 def blog_as_category(request, category_slug):
-    posts = Post.objects.filter(is_available=True, categories__slug=category_slug).order_by('-created_date')
+    posts = Post.objects.filter(is_available=True, categories__slug=category_slug).order_by('-published_date')
     paginator = Paginator(posts, 12) # show 12 contact per page.
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -58,7 +58,7 @@ def post_update(request, pk):
             post = form.save(commit=False)
             post.author = request.user
             post.categories.set(form.cleaned_data['categories'])
-            post.publish()
+            post.save()
 
             # if author make deactivate the post 
             if post.is_available == False:
@@ -81,7 +81,7 @@ def post_new(request):
             if form.is_valid():
                 post = form.save(commit=False)
                 post.author = request.user
-                post.publish()
+                post.save()
                 post.categories.set(form.cleaned_data['categories']) 
                 # This is(categories) adding after saveing beacuse this needs post id!
 

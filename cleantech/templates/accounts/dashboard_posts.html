@@ -44,7 +44,7 @@
                             <a href="{% url 'post_detail_dashboard' user.username post.slug %}" class="btn btn-info stretched-link float-end">Get Post</a>
                             </div>
                             <div class="card-footer">
-                                <small class="text-muted">{{ post.created_date|naturaltime }}</small>
+                                <small class="text-muted">{{ post.published_date|naturaltime }}</small>
                                 <small class="float-end">Author: {{ post.author|title }}</small>
                             </div>
                         </div>

@@ -91,7 +91,7 @@ def user_dashboard_posts(request, username):
 
         if request.user.username == username:
             username = str(username) #TODO Add more security if necessary
-            posts = Post.objects.filter(author__username=username, is_available=True).order_by('-created_date')
+            posts = Post.objects.filter(author__username=username, is_available=True).order_by('-published_date')
             if posts:
                 context = {
                     'posts': posts
@@ -115,7 +115,7 @@ def user_dashboard_drafts(request, username):
     if Profile.objects.get(user=request.user).user_type == 'blog_author':
         if request.user.username == username:
             username = str(username) #TODO Add more security if necessary
-            posts = Post.objects.filter(author__username=username, is_available=False).order_by('-created_date')
+            posts = Post.objects.filter(author__username=username, is_available=False).order_by('-published_date')
             if posts:
                 context = {
                     'posts': posts
