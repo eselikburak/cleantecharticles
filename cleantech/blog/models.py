@@ -18,12 +18,12 @@ def unique_slug(instance, slug):
 
 class Category(models.Model):
     name = models.CharField(max_length=50, unique=True)
-    slug = models.SlugField(max_length=60, unique=True, blank=True, editable=False)
+    slug = models.SlugField(max_length=60, unique=True, editable=False)
 
     def __str__(self):
         return self.name
 
-        # This save method is overwrited save method!
+    # This save method is overriding save method!
     def save(self, *args, **kwargs) -> None:
 
         self.slug = unique_slug(self, slugify(self.name))
@@ -42,7 +42,7 @@ class Post(models.Model):
     slug = models.SlugField(unique=True, editable=False)
 
 
-    # This save method is overwrited save method!
+    # This save method is overriding save method!
     def save(self, *args, **kwargs) -> None:
         
         self.last_update = timezone.now()

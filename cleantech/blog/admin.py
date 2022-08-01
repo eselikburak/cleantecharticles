@@ -16,4 +16,3 @@ class PostAdmin(admin.ModelAdmin):
 class CategoryAdmin(admin.ModelAdmin):
     readonly_fields: Sequence[str] = ('slug', )
     list_display = ('name', 'slug')
-    

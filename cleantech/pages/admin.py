@@ -3,6 +3,10 @@ from .models import Home, Contact
 # Register your models here.
 
 admin.site.register(Home)
-admin.site.register(Contact)
+
+@admin.register(Contact)
+class ContactAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'subject')
+    
 
 admin.site.site_header = "Cleantecharticles Administration"

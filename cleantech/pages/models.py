@@ -43,4 +43,4 @@ class Contact(models.Model):
     message = models.TextField(blank=True)
 
     def __str__(self):
-        return self.email
+        return f"{self.name}: {self.message[:34]}"
