@@ -27,7 +27,7 @@ class Post(models.Model):
     image = models.ImageField(upload_to='images/blog/%Y/%m/%d/')
     is_available = models.BooleanField(default=True, verbose_name='Is Available')
     categories = models.ManyToManyField(Category, blank=True, verbose_name='Categories')
-    slug = models.SlugField()
+    slug = models.SlugField(unique=True, null=True)
 
     def publish(self):
         self.published_date = timezone.now()

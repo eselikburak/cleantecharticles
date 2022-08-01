@@ -46,6 +46,11 @@
                         {{ form.email }}
                     </div>
 
+                    <!-- Subject input -->
+                    <div class="mb-3">
+                        <label class="form-label" for="id_subject">Subject</label>
+                        {{ form.subject }}
+                    </div>
                     <!-- Message input -->
                     <div class="mb-3">
                         <label class="form-label" for="message">Message</label>
@@ -54,7 +59,7 @@
 
                     <!-- Form submit button -->
                     <div class="d-grid">
-                        <button class="btn btn-primary btn-lg" id="submitButton" type="submit">Send Message</button>
+                        <button class="btn btn-success btn-lg mx-auto" id="submitButton" type="submit">Send Message</button>
                     </div>
 
                 </form>

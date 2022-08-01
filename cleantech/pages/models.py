@@ -37,8 +37,9 @@ class Home(models.Model):
         return f'Home Object - {self.header_title}'
 
 class Contact(models.Model):
-    name = models.CharField(max_length=100)
-    email = models.EmailField(max_length=100)
+    name = models.CharField(max_length=100, verbose_name="Name")
+    email = models.EmailField(max_length=100, verbose_name="Email")
+    subject = models.CharField(max_length=150, null=True, verbose_name="Subject")
     message = models.TextField(blank=True)
 
     def __str__(self):

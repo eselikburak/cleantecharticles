@@ -10,6 +10,11 @@ class ContactForm(forms.ModelForm):
         'class': 'form-control',
         'placeholder': 'Your Email',
     }))
+    subject = forms.CharField(widget=forms.TextInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'Subject',
+        'max_length': 150,
+    }))
     message = forms.CharField(widget=forms.Textarea(attrs={
         'class': 'form-control',
         'placeholder': 'Your Message',
@@ -18,4 +23,4 @@ class ContactForm(forms.ModelForm):
 
     class Meta:
         model = Contact
-        fields =  ['name', 'email', 'message']
+        fields =  ['name', 'email','subject', 'message']
