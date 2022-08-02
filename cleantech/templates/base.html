@@ -27,6 +27,25 @@
 
     {% comment %} Custom Style {% endcomment %}
     <style rel="stylesheet">{% block style %} {% endblock %}</style>
+
+    <style  rel="stylesheet">
+        .active {
+            background-color: grey !important;
+            border-radius: 5px !important;
+        }
+        a:active {
+            background-color: grey !important;
+            border-radius: 5px !important;
+        }
+        a.list-group-item:hover {
+            color: rgb(153, 235, 205) !important;
+            font-size: 124% !important;
+            background-color: rgb(71, 69, 69) !important;
+        }
+        .card:hover{
+            box-shadow: 5px green !important;
+        }
+    </style>
     
 </head>
 
@@ -48,13 +67,16 @@
     <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
 
 
-    <!-- This is for post_update.html -->
+    
     <script>
+        {% comment %} This is for post_update.html {% endcomment %}
+
         $( "#id_categories" ).addClass("form-select");
 
         $("#id_title").on("input", function() {
             $(document).prop('title', this.value);
         });
+
 
         {% comment %} Delete if there is a message on the page! {% endcomment %}
         if ($("#message")){
@@ -62,12 +84,23 @@
                 $("#message").remove();
             }, 4000)
         }
-    </script>
 
-    <script>
-        {% block custom_script %}
 
-        {% endblock  %}
+        $(document).ready(function() {
+        // executes when HTML-Document is loaded and DOM is ready
+
+            $( ".card" ).hover(
+            function() {
+                $(this).addClass('shadow-lg border border-dark').css('transform', 'scale(1.03)');
+            }, function() {
+                $(this).removeClass('shadow-lg border border-dark').css('transform', 'scale(1.0)');
+            }
+            );
+            
+            // document ready  
+        });
+
+    {% comment %} Source: https://codepen.io/JacobLett/pen/jzdYPz {% endcomment %}
     </script>
 
 </body>

@@ -3,18 +3,56 @@ body {
     background-color: #f7f7f5;
 }
 
-.customactive {
-    color: white;
-    background: linear-gradient(90deg, rgba(2,0,36,1) 3%, rgba(58,106,176,1) 71%);
-}
-
-
-.customhov:hover {
-    color: white;
-    background: linear-gradient(90deg, rgba(2,0,36,1) 3%, rgba(58,106,176,1) 71%);
-} 
-
 /* counter style start */
 
 
 /* counter style ends */
+
+
+/* Scroll bar */
+
+
+/* Source: https://www.w3schools.com/howto/howto_css_custom_scrollbar.asp */
+
+/* width */
+::-webkit-scrollbar {
+    width: 12px;
+    background-color: black;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 7px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: darkgrey;
+    border-radius: 7px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: grey;
+}
+
+/* Scroll bar ends */
+
+
+/* Source : https://braydoncoyer.dev/blog/change-text-highlight-color-with-css */
+/* Text highlighted color */
+::selection {
+    background: #C9F0DD;
+    color: black;
+}
+
+/* Blog header background */
+/* source: https://stackoverflow.com/questions/9262861/css-background-image-to-fit-width-height-should-auto-scale-in-proportion */
+#blogheader {
+    background-image: url(https://media.giphy.com/media/tL5HmgfZi0Qow/giphy.gif);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;     
+    
+}

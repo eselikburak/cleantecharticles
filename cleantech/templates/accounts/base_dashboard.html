@@ -28,26 +28,26 @@
                     </a>
                     <hr>
                     <ul class="nav nav-pills flex-column mb-auto">
-                        <li class="nav-item  {% if 'posts' in request.path %}customactive{% endif %}">
-                            <a href="{% url 'my-posts' user.username %}" class="nav-link customhov text-white" aria-current="page">
+                        <li class="nav-item  {% if 'posts' in request.path %}active{% endif %}">
+                            <a href="{% url 'my-posts' user.username %}" class="nav-link text-white" aria-current="page">
                                 <i class="fa fa-book"></i>&nbsp;
                                 My {% if user.user_profile.user_type == 'blog_author' %}Blog's {% elif user.user_profile.user_type == 'tutorials_author' %}Tutorial's {% endif %}
                             </a>
                         </li>
-                        <li class="{% if 'post-new' in request.path %}customactive{% endif %}">
-                            <a href="{% url 'post_new' %}" class="nav-link text-white customhov">
+                        <li class="{% if 'post-new' in request.path %}active{% endif %}">
+                            <a href="{% url 'post_new' %}" class="nav-link text-white">
                                 <i class="fa fa-plus-circle"></i>&nbsp;
                                 Add New Article
                             </a>
                         </li>
-                        <li class="{% if 'drafts' in request.path %}customactive{% endif %}">
-                            <a href="{% url 'my-drafts' user.username %}" class="nav-link text-white customhov ">
+                        <li class="{% if 'drafts' in request.path %}active{% endif %}">
+                            <a href="{% url 'my-drafts' user.username %}" class="nav-link text-white">
                                 <i class="fa fa-anchor"></i>&nbsp;
                                 My Drafts
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="nav-link text-white customhov">
+                            <a href="#" class="nav-link text-white">
                                 <i class="fa fa-cog"></i>&nbsp;
                                 Settings
                             </a>
