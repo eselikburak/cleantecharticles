@@ -35,7 +35,7 @@
             </div>
 
             
-            <div class="col-lg-9 my-2">
+            <div class="col-lg-9 my-4">
                     {% if messages %}
                         {% for message in messages %}
                             <div id="message" class="alert alert-{{message.tags}}">
@@ -52,7 +52,6 @@
                                 <img src="{{ post.image.url }}" class="card-img-top" alt="...">
                                 <div class="card-body">
                                   <h5 class="card-title">{{ post.title|title }}</h5>
-                                  <p class="card-text">{{ post.content|truncatechars:"100"|safe }}</p>
                                   <a href="{% url 'post_detail' post.slug %}" class="btn btn-info stretched-link float-end">Get Post</a>
                                 </div>
                                 <div class="card-footer">

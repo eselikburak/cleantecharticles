@@ -37,10 +37,10 @@ class Home(models.Model):
         return f'Home Object - {self.header_title}'
 
 class Contact(models.Model):
-    name = models.CharField(max_length=100, verbose_name="Name")
-    email = models.EmailField(max_length=100, verbose_name="Email")
-    subject = models.CharField(max_length=150, null=True, verbose_name="Subject")
-    message = models.TextField(blank=True)
+    name = models.CharField(max_length=80, verbose_name="Name")
+    email = models.EmailField(max_length=90, verbose_name="Email")
+    subject = models.CharField(max_length=255, verbose_name="Subject")
+    message = models.TextField(verbose_name="Message")
 
     def __str__(self):
         return f"{self.name}: {self.message[:34]}"
