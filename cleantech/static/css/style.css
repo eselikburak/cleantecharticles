@@ -10,8 +10,6 @@ body {
 
 
 /* Scroll bar */
-
-
 /* Source: https://www.w3schools.com/howto/howto_css_custom_scrollbar.asp */
 
 /* width */
@@ -56,3 +54,11 @@ body {
     background-size: cover;     
     
 }
+
+
+/* Open dropdowns when hover */
+/* source: https://stackoverflow.com/questions/16214326/bootstrap-dropdown-with-hover */
+.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0; 
+ }

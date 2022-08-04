@@ -8,7 +8,7 @@
 <br>
 <div class="bg-dark text-secondary px-3 py-4 text-center my-2">
   <div class="py-5">
-      <h1 class="display-5 fw-bold text-white">{{post.title|title}}</h1>
+      <h1 class="display-6 fw-bold text-white">{{post.title|title}}</h1>
       <div class="col-lg-6 mx-auto">
           <p class="mb-3">
             <div >
@@ -35,7 +35,8 @@
         <div class="my-3">
           <p class="text-secondary float-end">{% if post.last_update %}Last Update: {{post.last_update|naturaltime}}{% else %}{{ post.published_date|naturaltime }}{% endif %}</p>
           <br>
-          <h4 class="">{{ post.title|title }}</h4>
+          <h3 class="display-8 fw-bold">{{ post.title|title }}</h3>
+          <hr> 
           <div class="row">
             <div class="col-2"></div>
             <div class="col-8"><img src="{{ post.image.url }}" style="width:100%; height:auto;" class="card-img-top mx-auto my-3" alt="..."></div>
