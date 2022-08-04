@@ -22,5 +22,9 @@ class Profile(models.Model):
                                  default=DEFAULT_USER_TYPE, 
                                  max_length=15)
 
+    user_image = models.ImageField(upload_to="images/accounts/", default="images/accounts/default_user_image.jpg")
+
+    user_biography = models.TextField(blank=True, null=True)
+
     def __str__(self):
         return f"{self.user.id}: {self.user_type}"

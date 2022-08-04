@@ -65,12 +65,12 @@
                         <li class="nav-item dropdown">
                             <a href="#" class="text-white text-decoration-none dropdown-toggle"
                                 id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="https://github.com/mdo.png" alt="" width="26" height="26" class="rounded-circle me-2">
+                                <img src="{{ user.user_profile.user_image.url }}" alt="" width="26" height="26" class="rounded-circle me-2">
                                 <strong>Hi, {{user.username|title}}</strong>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
                                 <li><a class="dropdown-item" href="{% url 'my-dashboard' %}"><i class="fa fa-tachometer" aria-hidden="true"></i>&nbsp; Dashboard</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="fa fa-user" aria-hidden="true"></i>&nbsp; Profile</a></li>
+                                <li><a class="dropdown-item" href="{% url 'profile' user.username %}"><i class="fa fa-user" aria-hidden="true"></i>&nbsp; Profile</a></li>
                                 <li><a class="dropdown-item" href="#"><i class="fa fa-cog" aria-hidden="true"></i>&nbsp; Settings</a></li>
                                 {% if user.user_profile.user_type == 'blog_author'%}
                                 <li><a class="dropdown-item" href="#" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp; Blog Author</a></li>

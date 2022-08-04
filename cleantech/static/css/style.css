@@ -48,7 +48,7 @@ body {
 /* Blog header background */
 /* source: https://stackoverflow.com/questions/9262861/css-background-image-to-fit-width-height-should-auto-scale-in-proportion */
 #blogheader {
-    background-image: url(https://media.giphy.com/media/tL5HmgfZi0Qow/giphy.gif);
+    background-image: url(https://media.giphy.com/media/BW51OCstarPBm/giphy.gif);
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;     

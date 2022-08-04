@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ user.username|title }} - Profile {% endblock  %}
+
+
+{% block content %}
+
+
+<div class="bg-dark text-secondary px-3 py-4 text-center my-2">
+    <div class="py-5">
+      <h1 id="blog-title" class="display-5 fw-bold text-white">Profile - {{ user.username|title }}</h1>
+      <div class="col-lg-6 mx-auto">
+        <p class="fs-5 mb-4"></p>
+      </div>
+    </div>
+  </div>
+
+<div class="container">
+    <div class="row my-4 mx-auto">
+        <div class="col-3"></div>
+        <div class="col-6">
+
+            <p class="">Name : {{ user.first_name }}</p>
+            <hr>
+            <p class="">Surname : {{ user.last_name }}</p>
+            <hr>
+            <p class="">Username : {{ user.username }}</p>
+            <hr>
+            <p class="">User Type : {{ user.user_profile.user_type }}</p>
+            <hr>
+            <p class="">Profile Image : </p> <img src="{{ user.user_profile.user_image.url }}" style="height: 55px; width: 55px;" alt="">
+            <hr>
+            <p class="">Email: {{ user.email }}</p>
+            <hr>
+
+            <p class="">Biography : <br> {% if user.user_profile.user_biography == None %} <span class"text-muted">Type something about yourself!</span> {% else %} {{ user.user_profile.user_biography }} {% endif %}</p>
+            <hr>
+
+            <div class="row">
+                <div class="col-6 d-flex justify-content-center">
+                    <a href="" class="btn btn-danger">Deactivate Account</a>
+                </div>
+                <div class="col-6 d-flex justify-content-center">
+                    <a href="" class="btn btn-success">Change Password</a>
+                </div>
+            </div>
+            
+
+
+
+
+        </div>
+        <div class="col-lg-3"></div>
+    </div>
+</div>
+{% endblock  %}

@@ -141,13 +141,16 @@ def post_detail_dashboard(request, username, post_slug):
     else:
         return redirect('my-dashboard')
     
+@login_required
 def user_profile(request, username):
     current_user = request.user
-    user = get_object_or_404(User, username=str(username))
-    if user.id == current_user.id: # if this statement is true user looking own profile page.
-        context = {
-            'user': user
-         }
-        return render(request, 'accounts/profile.html', context)
+    if isinstance(username, str):
+        user = get_object_or_404(User, username=username)
+        if user.id == current_user.id: # if this statement is true user looking own profile page.
+            return render(request, 'accounts/profile.html')
+        else:
+            messages.info(request, "Sorry, you can not see the other user profiles!")
+            return redirect('allposts')
     else:
-        pass
+        messages.info(request, "Wrong Request!")
+        return redirect('home')
