@@ -5,8 +5,31 @@
 
 
 {% block content %}
+
+<!-- For Callout -->
+<style>
+  .callout {
+    position: fixed;
+    bottom: 35px;
+    right: 20px;
+    margin-left: 20px;
+    max-width: 300px;
+  }
+  
+  .callout-header {
+    padding: 25px 15px;
+    background: rgb(48, 196, 250);
+    font-size: 24px;
+    color: rgb(0, 0, 0);
+    border-radius: 15px;
+  }
+  
+  .closebtn:hover {
+    color: rgb(189, 64, 64);
+  }
+  </style>
 <br>
-<div class="bg-dark text-secondary px-3 py-4 text-center my-2">
+<div class="bg-dark text-secondary px-3 py-4 text-center my-2>
   <div class="py-5">
       <h1 class="display-6 fw-bold text-white">{{post.title|title}}</h1>
       <div class="col-lg-6 mx-auto">
@@ -33,9 +56,18 @@
     <div class="col-lg-6 px-3" style="background-color:#faf9f2; border-radius: 5px;">
         <!-- card -->
         <div class="my-3">
-          <p class="text-secondary float-end">{% if post.last_update %}Last Update: {{post.last_update|naturaltime}}{% else %}{{ post.published_date|naturaltime }}{% endif %}</p>
+          <div class="row">
+            <div class="col-6">
+              <button class="btn btn-link btn-sm pb-2" type="button" id="copybutton" 
+              style="text-decoration: none; color: blueviolet;" onclick="copyUrl();" title="Copy article url to share!"> <i class="fa fa-clipboard" aria-hidden="true"></i>&nbsp;Copy Post Link</button>
+
+            </div>
+            <div class="col-6">
+              <p class="text-secondary pt-1">{% if post.last_update %}Last Update: {{post.last_update|naturaltime}}{% else %}{{ post.published_date|naturaltime }}{% endif %}</p>
+            </div>
+          </div>
           <br>
-          <h3 class="display-8 fw-bold">{{ post.title|title }}</h3>
+          <h3 class="display-8">{{ post.title|title }}</h3>
           <hr> 
           <div class="row">
             <div class="col-2"></div>
@@ -58,5 +90,45 @@
   </div>
 </div>
 
+<div class="callout" id="callout" style="display: none;">
+  <div class="alert alert-success shadow px-3">Copied to Clipboard!</div>
+</div>
+
+<script>
+  function copyUrl() {
+    var current_url = window.location.href;
+    navigator.clipboard.writeText(current_url);
+    var copybutton = document.getElementById("copybutton");
+    copybutton.setAttribute("disabled", true);
+    copybutton.innerHTML = '<i class="fa fa-clipboard" aria-hidden="true"></i> Copied';
+
+    callout = document.getElementById("callout");
+    callout.style.display = "block";
+    setTimeout(() => {
+      callout.style.display = "none";
+    }, 6000);
+  }
+
+
+  // check clipboard text every 0.5 sec
+  var t = setInterval(checkClipBoard, 500);
+
+  async function checkClipBoard () {
+
+    // To avoid DOMException when open console in the browser cuz this need to be focus!
+    try {
+      var text = await navigator.clipboard.readText();
+      } catch (error) {   
+    }
+    var current_url = window.location.href;
+    var copybutton = document.getElementById("copybutton");
+    if (text != current_url) { 
+      copybutton.removeAttribute("disabled");
+      copybutton.innerHTML = '<i class="fa fa-clipboard" aria-hidden="true"></i> Copy Post Link';
+    }
+    
+  }
+
+</script>
 
 {% endblock  %}
