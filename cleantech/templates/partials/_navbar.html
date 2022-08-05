@@ -30,7 +30,7 @@
                         data-bs-toggle="dropdown" aria-expanded="false">
                         Tutorials
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
+                    <ul class="dropdown-menu dropdown-menu-dark animate slideIn" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="#">Django Tutorial</a></li>
                         <li><a class="dropdown-item" href="#">Python Tutorial</a></li>
                         <li><a class="dropdown-item" href="#">Cyber Security Tutorial</a></li>
@@ -45,7 +45,7 @@
                         data-bs-toggle="dropdown" aria-expanded="false">
                         Os
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
+                    <ul class="dropdown-menu dropdown-menu-dark animate slideIn" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item {% if 'linux' in request.path %}active{% endif %}"
                                 href="{% url 'blog_as_category' 'linux' %}">Linux</a></li>
                         <li><a class="dropdown-item {% if 'windows' in request.path %}active{% endif %}"
@@ -68,7 +68,7 @@
                                 <img src="{{ user.user_profile.user_image.url }}" alt="" width="26" height="26" class="rounded-circle me-2">
                                 <strong>Hi, {{user.username|title}}</strong>
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+                            <ul class="dropdown-menu dropdown-menu-dark animate slideIn text-small shadow" aria-labelledby="dropdownUser1">
                                 <li><a class="dropdown-item" href="{% url 'my-dashboard' %}"><i class="fa fa-tachometer" aria-hidden="true"></i>&nbsp; Dashboard</a></li>
                                 <li><a class="dropdown-item" href="{% url 'profile' user.username %}"><i class="fa fa-user" aria-hidden="true"></i>&nbsp; Profile</a></li>
                                 <li><a class="dropdown-item" href="#"><i class="fa fa-cog" aria-hidden="true"></i>&nbsp; Settings</a></li>

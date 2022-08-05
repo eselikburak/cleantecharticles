@@ -93,13 +93,16 @@
         </div>
     </div>
 
+    
 {% endblock content %}
 
 {% block custom_script %}
-    {% comment %} Change blog blog title if slected a category. {% endcomment %}
-    if ($("a.list-group-item").is('.customactive')){
-        var current_category = $("a.list-group-item.customactive").text()
+    {% comment %} Change blog title if slected a category. {% endcomment %}
+    
+    if ($("a.list-group-item").is(".active")){
+        var current_category = $("a.list-group-item.active").text();
         $("#blog-title").text("Blog - " + current_category);
         $(document).prop('title', "Blog - " + current_category + " | cta")
     }
 {% endblock %}
+
