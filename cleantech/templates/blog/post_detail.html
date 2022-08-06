@@ -71,7 +71,7 @@
           <hr> 
           <div class="row">
             <div class="col-2"></div>
-            <div class="col-8"><img src="{{ post.image.url }}" style="width:100%; height:auto;" class="card-img-top mx-auto my-3" alt="..."></div>
+            <div class="col-8"><img src="{% if post.image %}{{ post.image.url }}{% endif %}" style="width:100%; height:auto;" class="card-img-top mx-auto my-3" alt="..."></div>
             <div class="col-2"></div>
           </div>
 
@@ -110,24 +110,6 @@
   }
 
 
-  // check clipboard text every 0.5 sec
-  var t = setInterval(checkClipBoard, 500);
-
-  async function checkClipBoard () {
-
-    // To avoid DOMException when open console in the browser cuz this need to be focus!
-    try {
-      var text = await navigator.clipboard.readText();
-      } catch (error) {   
-    }
-    var current_url = window.location.href;
-    var copybutton = document.getElementById("copybutton");
-    if (text != current_url) { 
-      copybutton.removeAttribute("disabled");
-      copybutton.innerHTML = '<i class="fa fa-clipboard" aria-hidden="true"></i> Copy Post Link';
-    }
-    
-  }
 
 </script>
 
