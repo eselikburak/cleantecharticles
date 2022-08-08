@@ -20,3 +20,17 @@
     </div>
 
 {% endblock  %}
+
+{% block custom_script %}
+
+    {% comment %} To change the title of the page base on the new post title {% endcomment %}
+    
+    $("#id_title").on("input", function() {
+        $(document).prop('title', this.value);
+    });
+
+    {% comment %} To add bootstrap style class to categories  {% endcomment %}
+
+    $( "#id_categories" ).addClass("form-select");
+
+{% endblock %}

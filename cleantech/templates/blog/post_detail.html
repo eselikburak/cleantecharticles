@@ -55,9 +55,7 @@
         <div class="my-3">
           <div class="row">
             <div class="col-6">
-              <button class="btn btn-link btn-sm pb-2" type="button" id="copybutton" 
-              style="text-decoration: none; color: blueviolet;" onclick="copyUrl();" title="Copy article url to share!"> <i class="fa fa-clipboard" aria-hidden="true"></i>&nbsp;Copy Post Link</button>
-
+              <span class="badge bg-info" id="copybutton" style="" onclick="copyUrl();" title="Copy article url to share!"> <i class="fa fa-clipboard" aria-hidden="true"></i>&nbsp;Copy Post Link</span>
             </div>
             <div class="col-6">
               <p class="text-secondary pt-1">{% if post.last_update %}Last Update: {{post.last_update|naturaltime}}{% else %}{{ post.published_date|naturaltime }}{% endif %}</p>
@@ -91,25 +89,27 @@
   <div class="alert alert-success shadow px-3">Copied to Clipboard!</div>
 </div>
 
-<script>
-  function copyUrl() {
-    var current_url = window.location.href;
-    navigator.clipboard.writeText(current_url);
-    var copybutton = document.getElementById("copybutton");
-    copybutton.setAttribute("disabled", true);
-    copybutton.innerHTML = '<i class="fa fa-clipboard" aria-hidden="true"></i> Copied';
-
-    callout = document.getElementById("callout");
-    callout.style.display = "block";
-    setTimeout(() => {
-      callout.style.display = "none";
-      copybutton.innerHTML = '<i class="fa fa-clipboard" aria-hidden="true"></i> Copy Post Link';
-      copybutton.removeAttribute("disabled");
-    }, 6000);
-  }
-
-
-
-</script>
 
 {% endblock  %}
+
+{% block custom_script %}
+    function copyUrl() {
+      var current_url = window.location.href;
+      navigator.clipboard.writeText(current_url);
+      var copybutton = $("#copybutton");
+      copybutton.attr("disabled", true);
+      copybutton.removeClass("bg-info");
+      copybutton.addClass("bg-success");
+      copybutton.html('<i class="fa fa-clipboard" aria-hidden="true"></i> Copied');
+
+      callout = $("#callout");
+      callout.css("display", "block");
+      setTimeout(() => {
+        callout.css("display", "none");
+        copybutton.html('<i class="fa fa-clipboard" aria-hidden="true"></i> Copy Post Link');
+        copybutton.removeAttr("disabled");
+        copybutton.removeClass("bg-success");
+        copybutton.addClass("bg-info");
+      }, 6000);
+    }
+{% endblock %}

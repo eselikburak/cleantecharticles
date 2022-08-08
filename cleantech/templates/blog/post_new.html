@@ -4,20 +4,33 @@
 
 {% block dashboard_content %}
 
-<div class="container my-3">
-    <div class="row">
-        <div class="col-lg-12">
-            <form action="" method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{ form.media }}
-                {{ form.as_p }}
-                <div class="mb-3 d-flex justify-content-end">
-                    <button type="submit" class="btn btn-outline-success">Publish</button>
-                </div>
-            </form>
+    <div class="container my-3">
+        <div class="row">
+            <div class="col-lg-12">
+                <form action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.media }}
+                    {{ form.as_p }}
+                    <div class="mb-3 d-flex justify-content-end">
+                        <button type="submit" class="btn btn-outline-success">Publish</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
-
 
 {% endblock  %}
+
+{% block custom_script %}
+
+    {% comment %} To change the title of the page base on the new post title {% endcomment %}
+    
+    $("#id_title").on("input", function() {
+        $(document).prop('title', this.value);
+    });
+
+    {% comment %} To add bootstrap style class to categories  {% endcomment %}
+
+    $( "#id_categories" ).addClass("form-select");
+
+{% endblock %}
