@@ -18,17 +18,18 @@
     </div>
     <div class="container px-5">
         <div class="row d-flex justify-content-center">
-            <div class="col-lg-3 my-3">
-                <form action="{% url 'search' %}" class="d-flex mx-4" method="GET">
-                    <input class="input-text form-control me-2" type="text" placeholder="Find on CTA: {{ search_query }}" name="search" maxlength="45">
-                    <input class="btn btn-outline-warning" type="submit" value="search">
+
+            <div class="col-lg-3 my-3 d-inline">
+                <form action="{% url 'search' %}" class="d-flex" method="GET">
+                    <input class="input-text form-control me-2" type="text" placeholder="{{ search_query }}" name="search">
+                    <input class="btn btn-outline-warning" type="submit" value="Search">
                   </form>
                 <hr>
                 <h5 class="text-center">Categories</h5>
                 <br>
-                <ul class="list-group shadow-lg mx-4" id="category_list" title="categories">
+                <ul class="list-group shadow-lg" id="category_list" title="categories">
                     {% for category in categories %}
-                        <a href="{% url 'blog_as_category' category.slug %}" class="list-group-item {% if category.slug in request.path %}active{% endif %}">{{ category.name }}</a>
+                        <a href="{% url 'blog_as_category' category.slug %}" class="list-group-item {% if category.slug in request.path %}active{% endif %}">{{ category.name|title }}</a>
                     {% endfor %}
                 </ul>
 

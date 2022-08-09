@@ -8,6 +8,7 @@
 
 <!-- For Callout -->
 <style>
+  
   .callout {
     position: fixed;
     bottom: 35px;
@@ -24,7 +25,8 @@
     border-radius: 15px;
   }
   
-  </style>
+</style>
+
 <br>
 <div class="bg-dark text-secondary px-3 py-4 text-center my-2">
   <div class="py-5">
@@ -55,10 +57,10 @@
         <div class="my-3">
           <div class="row">
             <div class="col-6">
-              <span class="badge bg-info" id="copybutton" style="" onclick="copyUrl();" title="Copy article url to share!"> <i class="fa fa-clipboard" aria-hidden="true"></i>&nbsp;Copy Post Link</span>
+              <p class="text-secondary pt-1">{% if post.last_update %}Last Update: {{post.last_update|naturaltime}}{% else %}{{ post.published_date|naturaltime }}{% endif %}</p>
             </div>
             <div class="col-6">
-              <p class="text-secondary pt-1">{% if post.last_update %}Last Update: {{post.last_update|naturaltime}}{% else %}{{ post.published_date|naturaltime }}{% endif %}</p>
+              <span class="badge bg-info p-2 float-end" id="copybutton" style="cursor: pointer !important;" onclick="copyUrl();" title="Copy article url to share!"> <i class="fa fa-clipboard" aria-hidden="true"></i>&nbsp;Copy Post Link</span>
             </div>
           </div>
           <br>
