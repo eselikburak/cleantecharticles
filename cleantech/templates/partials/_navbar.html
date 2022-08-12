@@ -90,7 +90,7 @@
                             </ul>
                         </li>
                     {% else %}
-                        <a type="button" class="btn btn-outline-success" href="{% url 'login' %}?next={{request.path}}" id="signin"
+                        <a type="button" class="btn btn-outline-success" href="{% url 'login' %}" id="signin"
                             ><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp; Log in</a>
 
                         <a type="button" class="btn btn-outline-primary" id="signup" href="{% url 'register' %}"
