@@ -20,16 +20,13 @@
         <div class="row d-flex justify-content-center ">
 
             <div class="col-lg-3 my-3 d-inline">
-                <form action="{% url 'search' %}" class="d-flex" method="GET">
+                <form action="{% url 'search' %}" class="d-flex" method="GET" autocomplete="off">
                     <input class="input-text form-control me-2" type="text" id="searchbox" placeholder="Find on CTA" name="search">
                     <input class="btn btn-outline-warning" type="submit" value="Search">
                   </form>  
-                <div class="mb-3 mt-1 card d-none" id="searchcard" style="">
-                    <div class="card-header ">
-                        <h5 class="text-start my-auto text-muted">Search Results</h5>
-                    </div>
-                    <div class="card-body" >
-                        <ul class="list-group shadow-lg list-group-flush rounded" id="search_results">
+                  <div class="mb-3 mt-1 card overflow-auto" id="searchcard" style="display: none; position: relative; z-index: 1; height: 160px; font-size: 11px;">
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush rounded" id="search_results">
 
                         </ul>
                     </div>
