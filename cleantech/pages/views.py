@@ -2,25 +2,29 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from .models import Home
 from accounts.models import Profile
-from django.views.generic import FormView
+from django.views.generic import FormView, TemplateView
 from django.contrib.messages.views import SuccessMessageMixin
 from .forms import ContactForm
 
-def home(request):
-    num_of_authors = Profile.objects.filter(user_type='blog_author').count()
-    num_of_authors += Profile.objects.filter(user_type='tutorial_author').count()
-    context = {
-        'home_content': Home.objects.all()[0],
-        'num_of_authors': num_of_authors,
-    }
-    return render(request, 'pages/home.html', context)
+class HomeView(TemplateView):
+    template_name: str = 'pages/home.html'
+
+    def get_context_data(self, **kwargs) -> dict:
+        context = super().get_context_data(**kwargs)
+        num_of_authors = Profile.objects.filter(user_type='blog_author').count()
+        num_of_authors += Profile.objects.filter(user_type='tutorial_author').count()
+        context['home_content'] = Home.objects.all()[0]
+        context['num_of_authors'] = num_of_authors
+        return context
 
 
-def about(request):
-    context = {
-        'home_content': Home.objects.all()[0]
-    }
-    return render(request, 'pages/about.html', context)
+class AboutView(TemplateView):
+    template_name: str = 'pages/about.html'
+
+    def get_context_data(self, **kwargs) -> dict:
+        context = super().get_context_data(**kwargs)
+        context['home_content'] = Home.objects.all()[0]
+        return context
 
 
 class ContactView(SuccessMessageMixin, FormView):

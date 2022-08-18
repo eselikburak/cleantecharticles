@@ -9,6 +9,7 @@ from django.contrib import messages
 from .forms import PostForm
 from .models import Post, Category
 from django.contrib.auth.decorators import login_required
+from django.views.generic import View
 
 
 def blog(request):
@@ -126,21 +127,22 @@ from django.http import JsonResponse
 from django.core import serializers
 
 
-def search(request):
+class SearchView(View):
 
-    # Add here more filter to security or search on net !
-    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-        searchbox_text = request.GET.get('searchbox_text')
-        if searchbox_text == "" or len(searchbox_text) > 200:
-            search_results = False
-        else:
-            #TODO Do not send all object data just send title and slug field!
-            search_results = Post.objects.filter(is_available=True, title__contains=str(searchbox_text))
-        if search_results and search_results.count() >= 1:  
-            search_results = serializers.serialize('json', search_results)
-        else:
-            search_results = False # list(search_results)
-        return JsonResponse({'search_results': search_results}, status=200)
+    def get(self, request):
+        # Add here more filter to security or search on net !
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            searchbox_text = request.GET.get('searchbox_text')
+            if searchbox_text == "" or len(searchbox_text) > 200:
+                search_results = False
+            else:
+                #TODO Do not send all object data just send title and slug field!
+                search_results = Post.objects.filter(is_available=True, title__contains=str(searchbox_text))
+            if search_results and search_results.count() >= 1:  
+                search_results = serializers.serialize('json', search_results)
+            else:
+                search_results = False # list(search_results)
+            return JsonResponse({'search_results': search_results}, status=200)
 
-    else:
-        raise Http404
+        else:
+            raise Http404
