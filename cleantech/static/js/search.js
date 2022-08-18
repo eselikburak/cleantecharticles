@@ -20,8 +20,8 @@ $(document).ready(function () {
                         $("#categories").fadeIn(250);
                     } else {
                         $("#search_results").html('')
-                        let msg = "No Result!"
-                        $("#search_results").html($("#search_results").html() + "<p class='list-group-item text-warning'> - " + msg + "</p>");
+                        let msg = "No results for '" + x + "'";
+                        $("#search_results").html($("#search_results").html() + "<p class='list-group-item text-danger'> - " + msg + "</p>");
                     };
                 } else {
                     for (let i = 0; i < results.length; i++) {

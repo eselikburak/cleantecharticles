@@ -137,7 +137,7 @@ class SearchView(View):
                 search_results = False
             else:
                 #TODO Do not send all object data just send title and slug field!
-                search_results = Post.objects.filter(is_available=True, title__contains=str(searchbox_text))
+                search_results = Post.objects.filter(is_available=True, title__contains=str(searchbox_text))[:20]
             if search_results and search_results.count() >= 1:  
                 search_results = serializers.serialize('json', search_results)
             else:

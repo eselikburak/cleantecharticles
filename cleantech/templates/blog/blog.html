@@ -4,6 +4,30 @@
 
 {% block title %} Blog {% endblock title %}
 
+{% block style %}
+
+    .input-icons i {
+        position: absolute;
+    }
+      
+    .input-icons {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+      
+    .icon {
+        padding: 10px;
+        min-width: 40px;
+    }
+      
+    .input-field {
+        width: 100%;
+        padding: 10px;
+        text-align: center;
+    }
+
+{% endblock  %}
+
 {% block content %}
 
 
@@ -21,12 +45,15 @@
 
             <div class="col-lg-3 my-3 d-inline">
                 <form action="#" class="d-flex" method="GET" autocomplete="off">
-                    <input class="input-text form-control me-2" type="text" id="searchbox" placeholder="Find on CTA" name="search">
+                    <div class="input-icons">
+                        <i class="bi bi-search icon"></i> 
+                        <input class="input-text form-control me-2 input-field" type="text" id="searchbox" placeholder="Find on CTA" name="search" maxlength="200">
+                    </div>
                   </form>
-                    <div class="mb-3 mt-1 card overflow-auto" id="searchcard" data-tag="dropdown-list" style="display: none; position: absolute; z-index: 1; font-size: 11px; max-height: 160px; min-width: 240px;">
+                    <div class="mb-3 mt-1 card overflow-auto" id="searchcard" data-tag="dropdown-list" style="display: none; position: absolute; z-index: 1; font-size: 14px; max-height: 160px; min-width: 240px; max-width: 560px;">
                         <div class="card-body">
                             <ul class="list-group list-group-flush rounded" id="search_results">
-
+                                
                             </ul>
                         </div>
                     </div>
